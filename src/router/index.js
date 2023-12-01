@@ -1,7 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/peter/employeeLoginView.vue'
 import IndexView from '../views/peter/employeeIndexView.vue'
-import hrView from '../views/peter/hrButtonView.vue'
+import hrmsView from '../views/peter/hrButtonView.vue'
+import empListView from '../views/peter/employeeListView.vue'
+import attendanceListView from '../views/peter/attendanceListView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -17,9 +19,19 @@ const router = createRouter({
       component: IndexView
     },
     {
-      path: '/emp/hr',
+      path: '/emp/hrms',
       name: 'hrPage',
-      component: hrView
+      component: hrmsView
+    },
+    {
+      path: '/emp/hrms/emp_list',
+      name: 'empListPage',
+      component: empListView
+    },
+    {
+      path: '/emp/hrms/emp_attendance',
+      name: 'attendanceListPage',
+      component: attendanceListView
     },
   ]
 })
