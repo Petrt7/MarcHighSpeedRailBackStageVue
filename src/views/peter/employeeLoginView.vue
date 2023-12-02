@@ -11,19 +11,6 @@ const loginUser = ref("");
 
 const router = useRouter();
 
-const a = () => {
-  httpClient.get("/employee/dto",)
-    .then(function (res) {
-      console.log("res: " + res)
-      loginUser.value = res.data.empName;
-      router.push("/emp/index");
-    })
-    .catch(function (err) {
-      console.log("err: " + err)
-    })
-}
-
-
 function postUserInput() {
   httpClient
     .post("/employee/login", null, {
@@ -37,6 +24,15 @@ function postUserInput() {
     .then(function (response) {
       result.value = response.data;
       clearInput();
+      httpClient.get("/employee/dto",)
+        .then(function (res) {
+          console.log("res: " + res)
+          loginUser.value = res.data.empName;
+          router.push("/emp/index");
+        })
+        .catch(function (err) {
+          console.log("err: " + err)
+        })
     })
     .catch(function (err) {
       result.value = err.response.data;
@@ -76,8 +72,6 @@ function clearInput() {
       <div id="result">{{ result }}</div>
 
       <div id="loginUser">{{ loginUser }}</div>
-
-      <button @click="a">跳轉</button>
     </div>
   </div>
 </template>

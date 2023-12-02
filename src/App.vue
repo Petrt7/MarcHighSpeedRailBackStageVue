@@ -7,7 +7,7 @@ const path = useRoute().path;
 </script>
 
 <template>
-  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-warning">
     <div class="container-fluid">
       <a class="navbar-brand" href="javascript:void(0)">Taiwan High Speed Rail</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
