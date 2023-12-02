@@ -34,6 +34,15 @@ function postUserInput() {
         .catch(function (err) {
           console.log("err: " + err)
         })
+      httpClient.get("/employee/dto",)
+        .then(function (res) {
+          console.log("res: " + res)
+          loginUser.value = res.data.empName;
+          router.push("/emp/index");
+        })
+        .catch(function (err) {
+          console.log("err: " + err)
+        })
     })
     .catch(function (err) {
       result.value = err.response.data;

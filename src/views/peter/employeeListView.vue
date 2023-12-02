@@ -34,4 +34,13 @@ function a() {
     </ul>
     {{ emps }}
     <button @click="a">測試</button>
+    <router-link to="/emp/hrms/add_emp"><button>新增員工</button></router-link>
+    <ul>
+        測試
+        <!-- <li v-if="emps" v-for="(emp, index) in emps">
+            員工ID: {{ emp.employeeId }}
+        </li> -->
+    </ul>
+    {{ emps }}
+    <button @click="a">測試</button>
 </template>
