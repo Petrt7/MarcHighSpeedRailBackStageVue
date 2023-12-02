@@ -35,7 +35,7 @@ const router = createRouter({
       component: attendanceListView
     },
     {
-      path: '/emp/hrms/emp_add',
+      path: '/emp/hrms/add_emp',
       name: 'addEmployeePage',
       component: addEmployeeView
     }
