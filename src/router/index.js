@@ -4,6 +4,7 @@ import IndexView from '../views/peter/employeeIndexView.vue'
 import hrmsView from '../views/peter/hrButtonView.vue'
 import empListView from '../views/peter/employeeListView.vue'
 import attendanceListView from '../views/peter/attendanceListView.vue'
+import addEmployeeView from '../views/peter/addEmployeeView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -33,6 +34,11 @@ const router = createRouter({
       name: 'attendanceListPage',
       component: attendanceListView
     },
+    {
+      path: '/emp/hrms/emp_add',
+      name: 'addEmployeePage',
+      component: addEmployeeView
+    }
   ]
 })
 
