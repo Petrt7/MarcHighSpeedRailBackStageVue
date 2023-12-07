@@ -1,7 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/peter/employeeLoginView.vue'
 import IndexView from '../views/peter/employeeIndexView.vue'
-import hrView from '../views/peter/hrButtonView.vue'
+import hrmsView from '../views/peter/hrButtonView.vue'
+import empListView from '../views/peter/employeeListView.vue'
+import attendanceListView from '../views/peter/attendanceListView.vue'
+import addEmployeeView from '../views/peter/addEmployeeView.vue'
+import employeeDataView from '../views/peter/employeeDataView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -17,10 +21,30 @@ const router = createRouter({
       component: IndexView
     },
     {
-      path: '/emp/hr',
+      path: '/emp/hrms',
       name: 'hrPage',
-      component: hrView
+      component: hrmsView
     },
+    {
+      path: '/emp/hrms/emp_list',
+      name: 'empListPage',
+      component: empListView
+    },
+    {
+      path: '/emp/hrms/emp_attendance',
+      name: 'attendanceListPage',
+      component: attendanceListView
+    },
+    {
+      path: '/emp/hrms/add_emp',
+      name: 'addEmployeePage',
+      component: addEmployeeView
+    },
+    {
+      path: '/emp/hrms/emp_data',
+      name: 'employeeDataPage',
+      component: employeeDataView
+    }
   ]
 })
 
