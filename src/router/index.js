@@ -6,7 +6,11 @@ import empListView from '../views/peter/employeeListView.vue'
 import attendanceListView from '../views/peter/attendanceListView.vue'
 import addEmployeeView from '../views/peter/addEmployeeView.vue'
 import employeeDataView from '../views/peter/employeeDataView.vue'
-
+// marc back stage component
+import trainBackStage from '../views/marc/train.vue'
+import railRouteBackStage from '../views/marc/railRoute.vue'
+import ticketDiscountBackStage from '../views/marc/ticketDiscount.vue'
+import scheduleTemplateBackStage from '../views/marc/scheduleTemplate.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -44,6 +48,21 @@ const router = createRouter({
       path: '/emp/hrms/emp_data',
       name: 'employeeDataPage',
       component: employeeDataView
+    },{
+      path: '/schedule/train',
+      component: trainBackStage
+    },
+    {
+      path: '/schedule/railRoute',
+      component: railRouteBackStage
+    },
+    {
+      path: '/schedule/ticketDiscount',
+      component: ticketDiscountBackStage,
+    },
+    {
+      path: '/schedule/scheduleTemplate',
+      component: scheduleTemplateBackStage
     }
   ]
 })
