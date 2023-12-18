@@ -12,6 +12,8 @@ import railRouteBackStage from '../views/marc/railRoute.vue'
 import ticketDiscountBackStage from '../views/marc/ticketDiscount.vue'
 import scheduleTemplateBackStage from '../views/marc/scheduleTemplate.vue'
 import implScheduleTemplate from '../views/marc/implScheduleTemplate.vue'
+// wowowork back stage component
+import lostAdd from '../views/wowowork/lostAdd.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -49,7 +51,7 @@ const router = createRouter({
       path: '/emp/hrms/emp_data',
       name: 'employeeDataPage',
       component: employeeDataView
-    },{
+    }, {
       path: '/schedule/train',
       component: trainBackStage
     },
@@ -68,7 +70,12 @@ const router = createRouter({
     {
       path: '/schedule/implScheduleTemplate/:schtid',
       component: implScheduleTemplate,
-      props:true
+      props: true
+    },
+    {
+      path: '/lostParadise/lostAdd',
+      component: lostAdd,
+
     }
   ]
 })
