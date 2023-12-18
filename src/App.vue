@@ -36,7 +36,10 @@ const path = useRoute().path;
             <ul class="dropdown-menu" aria-labelledby="shoppingDropdown">
               <li>
                 <button class="dropdown-item">
-                  <router-link to="/schedule/train" id="fontcolor"
+                  <router-link
+                    to="/schedule/train"
+                    id="fontcolor"
+                    class="nav-link"
                     >高鐵列車</router-link
                   >
                 </button>
@@ -91,5 +94,9 @@ div {
 }
 .container {
   margin: 20px;
+}
+.dropdown-menu {
+  background-color: #198754;
+  --bs-dropdown-link-hover-bg: #1cc91c;
 }
 </style>
