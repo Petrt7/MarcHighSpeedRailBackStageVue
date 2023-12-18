@@ -40,7 +40,7 @@ onBeforeMount(()=>{
             stationMap[ st.stopStation.stationId ]= st.stopStation.stationName
         }
         allStopStation.sort( (a,b)=> a.railRouteStopStationSequence- b.railRouteStopStationSequence);
-        getOffStationId.value = allStopStation[allStopStation.length-1].stopStation.stationId;
+        getOffStationId.value = allStopStation[0].stopStation.stationId
         getOnStationId.value = allStopStation[0].stopStation.stationId
 
     }).catch(err=>console.log(err))

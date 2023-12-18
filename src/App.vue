@@ -74,6 +74,11 @@ const path = useRoute().path;
                   >
                 </button>
               </li>
+              <li>
+                <button class="dropdown-item">
+                  <router-link to="/schedule/searchSchedule" class="nav-link" id="fontcolor">班次搜尋</router-link >
+                </button>
+              </li>
             </ul>
           </li>
         </ul>
@@ -102,46 +107,7 @@ const path = useRoute().path;
                   >
                 </button>
               </li>
-              <li>
-                <button class="dropdown-item">
-                  <router-link
-                    to="/schedule/ticketDiscount"
-                    class="nav-link"
-                    id="fontcolor"
-                    >車票優惠</router-link
-                  >
-                </button>
-              </li>
-              <li>
-                <button class="dropdown-item">
-                  <router-link
-                    to="/schedule/railRoute"
-                    class="nav-link"
-                    id="fontcolor"
-                    >高鐵路線</router-link
-                  >
-                </button>
-              </li>
-              <li>
-                <button class="dropdown-item">
-                  <router-link
-                    to="/schedule/scheduleTemplate"
-                    class="nav-link"
-                    id="fontcolor"
-                    >班次模板</router-link
-                  >
-                </button>
-              </li>
-              <li>
-                <button class="dropdown-item">
-                  <router-link to="/schedule/searchSchedule" class="nav-link" id="fontcolor">班次搜尋</router-link >
-                </button>
-              </li>
-              <!-- <li>
-                <button class="dropdown-item">
-                  <router-link to="/schedule/scheduleRestSeat" class="nav-link" id="fontcolor">班次剩餘座位數</router-link >
-                </button>
-              </li> -->
+              
             </ul>
           </li>
         </ul>
