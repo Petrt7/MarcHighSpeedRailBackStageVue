@@ -12,6 +12,8 @@ import railRouteBackStage from '../views/marc/railRoute.vue'
 import ticketDiscountBackStage from '../views/marc/ticketDiscount.vue'
 import scheduleTemplateBackStage from '../views/marc/scheduleTemplate.vue'
 import implScheduleTemplate from '../views/marc/implScheduleTemplate.vue'
+import searchScheudle from '../views/marc/searchSchedule.vue'
+import scheduleRestSeat from '../views/marc/scheduleRestSeat.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -68,6 +70,15 @@ const router = createRouter({
     {
       path: '/schedule/implScheduleTemplate/:schtid',
       component: implScheduleTemplate,
+      props:true
+    },
+    {
+      path: '/schedule/searchSchedule',
+      component: searchScheudle,
+    },
+    {
+      path: '/schedule/scheduleRestSeat/:schid',
+      component: scheduleRestSeat,
       props:true
     }
   ]
