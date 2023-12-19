@@ -16,6 +16,16 @@ import leaveAuditView from '../views/peter/leaveAuditView.vue'
 import carryForwardListView from '../views/peter/carryForwardList.vue'
 import errorView from '../views/peter/401ErrorView.vue'
 
+// marc back stage component
+import trainBackStage from '../views/marc/train.vue'
+import railRouteBackStage from '../views/marc/railRoute.vue'
+import ticketDiscountBackStage from '../views/marc/ticketDiscount.vue'
+import scheduleTemplateBackStage from '../views/marc/scheduleTemplate.vue'
+import implScheduleTemplate from '../views/marc/implScheduleTemplate.vue'
+import searchScheudle from '../views/marc/searchSchedule.vue'
+import scheduleRestSeat from '../views/marc/scheduleRestSeat.vue'
+// wowowork back stage component
+import lostAdd from '../views/wowowork/lostAdd.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -98,6 +108,41 @@ const router = createRouter({
       path: '/error',
       name: 'errorPage',
       component: errorView
+    }, {
+      path: '/schedule/train',
+      component: trainBackStage
+    },
+    {
+      path: '/schedule/railRoute',
+      component: railRouteBackStage
+    },
+    {
+      path: '/schedule/ticketDiscount',
+      component: ticketDiscountBackStage,
+    },
+    {
+      path: '/schedule/scheduleTemplate',
+      component: scheduleTemplateBackStage,
+    },
+    {
+      path: '/schedule/implScheduleTemplate/:schtid',
+      component: implScheduleTemplate,
+      props: true
+    },
+    {
+      path: '/schedule/searchSchedule',
+      component: searchScheudle,
+    },
+    {
+      path: '/schedule/scheduleRestSeat/:schid',
+      component: scheduleRestSeat,
+      props: true
+
+    },
+    {
+      path: '/lostParadise/lostAdd',
+      component: lostAdd,
+
     }
   ]
 })
