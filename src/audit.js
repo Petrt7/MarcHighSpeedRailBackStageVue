@@ -12,7 +12,7 @@ export const view = function (path) {
             return res.data
         })
         .catch((err) => {
-            router.push("/error")
+            // router.push("/error")
             return err.response.data
         })
 };
@@ -33,6 +33,20 @@ export const create = function (path) {
 
 export const del = function (path) {
     return httpClient.get(`/delete`, {
+        params: {
+            name: path
+        }
+    })
+        .then((res) => {
+            return res.data
+        })
+        .catch((err) => {
+            return err.response.data
+        })
+};
+
+export const update = function (path) {
+    return httpClient.get(`/update`, {
         params: {
             name: path
         }

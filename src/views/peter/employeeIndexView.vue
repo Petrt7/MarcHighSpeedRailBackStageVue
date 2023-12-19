@@ -11,7 +11,11 @@ const judgeLeaveApplyView = ref(false);
 const leaveAuditView = ref(false);
 
 onMounted(() => {
-    view(useRoute().path);
+    view(useRoute().path).then((res) => {
+        if (res === false) {
+            router.push("/error");
+        }
+    });
 
     view("/emp/author/list")
         .then((res) => {
@@ -45,34 +49,49 @@ onMounted(() => {
             leaveAuditView.value = err;
         });
 });
+
+function logout() {
+    httpClient
+        .put("/employee/logout")
+        .then((res) => {
+            router.push("/");
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+}
 </script>
 <template>
     <div class="container">
-        <div class="container text-center" style="margin-top: 15%">
+        <button class="btn btn-outline-success" style="margin-left: 90%" @click="logout">
+            登出
+        </button>
+        <div class="container text-center" style="margin-top: 12%">
             <div class="row align-items-center">
                 <div class="col">
-                    <router-link to="/emp/author/list"><button v-if="judgeAuthorListPage" class="btn btn-warning btn-lg">
+                    <router-link to="/emp/author/list"><button v-if="judgeAuthorListPage" class="btn btn-success btn-lg">
                             權限管理
                         </button></router-link>
                 </div>
                 <div class="col">
-                    <router-link to="/emp/hrms"><button v-if="judgeHrmsView" class="btn btn-warning btn-lg">
+                    <router-link to="/emp/hrms"><button v-if="judgeHrmsView" class="btn btn-success btn-lg">
                             人資管理
                         </button></router-link>
                 </div>
                 <div class="col">
-                    <router-link to="/emp/leave/apply"><button v-if="judgeLeaveApplyView" class="btn btn-warning btn-lg">
+                    <router-link to="/emp/leave/apply"><button v-if="judgeLeaveApplyView" class="btn btn-success btn-lg">
                             請假申請
                         </button></router-link>
                 </div>
             </div>
         </div>
     </div>
+    <br />
     <div class="container">
         <div class="container text-center">
             <div class="row align-items-center">
                 <div class="col">
-                    <router-link to="/emp/leave/audit"><button v-if="leaveAuditView" class="btn btn-warning btn-lg">
+                    <router-link to="/emp/leave/audit"><button v-if="leaveAuditView" class="btn btn-success btn-lg">
                             請假審核
                         </button></router-link>
                 </div>

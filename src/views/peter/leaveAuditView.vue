@@ -8,7 +8,11 @@ import httpClient from "@/main";
 const audits = reactive([]);
 
 onMounted(async () => {
-    view(useRoute().path);
+    view(useRoute().path).then((res) => {
+        if (res === false) {
+            router.push("/error");
+        }
+    });
     getAudit();
 });
 
@@ -77,8 +81,12 @@ function turnDown(audit) {
                 <td>{{ audit.reason }}</td>
                 <td><input type="datetime-local" :value="audit.startTime" disabled /></td>
                 <td><input type="datetime-local" :value="audit.endTime" disabled /></td>
-                <td><button @click="approve(audit)">核准</button></td>
-                <td><button @click="turnDown(audit)">駁回</button></td>
+                <td>
+                    <button @click="approve(audit)" class="btn btn-outline-success">核准</button>
+                </td>
+                <td>
+                    <button @click="turnDown(audit)" class="btn btn-outline-danger">駁回</button>
+                </td>
             </tr>
         </tbody>
     </table>

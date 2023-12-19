@@ -31,6 +31,7 @@
         </ul>
         <br />
         <button @click="addAuthor" class="btn btn-outline-success">新增</button>
+        {{ message }}
     </div>
 </template>
 <script setup>
@@ -38,9 +39,12 @@ import { onMounted, ref, reactive } from "vue";
 import { RouterLink, RouterView, useRoute } from "vue-router";
 import httpClient from "@/main";
 import router from "../../router";
-import { view } from "@/audit";
+import { view, create } from "@/audit";
 
 const deptName = ref("");
+const pagePath = useRoute().path;
+const judgeCreate = ref(false);
+const message = ref("");
 
 const json = reactive({
     depts: [],
@@ -52,7 +56,11 @@ const author = reactive({
 });
 
 onMounted(async () => {
-    view(useRoute().path);
+    view(useRoute().path).then((res) => {
+        if (res === false) {
+            router.push("/error");
+        }
+    });
     await getAllDepartments();
     await getAllSystems();
 });
@@ -89,7 +97,20 @@ function changeToInteger() {
     console.log(author.systems);
 }
 
-function addAuthor() {
+async function addAuthor() {
+    await create(pagePath)
+        .then((res) => {
+            judgeCreate.value = res;
+        })
+        .catch((err) => {
+            judgeCreate.value = err;
+        });
+
+    if (!judgeCreate.value) {
+        message.value = "沒有此權限";
+        return;
+    }
+
     changeToInteger();
     author.info = deptName.value;
     console.log(author.info);

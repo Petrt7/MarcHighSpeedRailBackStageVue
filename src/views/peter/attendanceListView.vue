@@ -6,7 +6,11 @@ import router from "../../router";
 import httpClient from "@/main";
 
 onMounted(async () => {
-    view(useRoute().path);
+    view(useRoute().path).then((res) => {
+        if (res === false) {
+            router.push("/error");
+        }
+    });
     getAllCarryForwards();
 });
 

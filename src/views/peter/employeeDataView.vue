@@ -181,7 +181,11 @@ const empTitle = reactive({
 });
 
 onMounted(() => {
-    view(useRoute().path);
+    view(useRoute().path).then((res) => {
+        if (res === false) {
+            router.push("/error");
+        }
+    });
     getemp();
     getdept();
     getTitle();

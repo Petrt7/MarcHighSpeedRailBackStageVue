@@ -13,8 +13,6 @@ const router = useRouter();
 function postUserInput() {
   httpClient
     .post("/employee/login", null, {
-      // acc:account.value,
-      // psw:psw.value
       params: {
         empAccount: account.value,
         psw: psw.value,
@@ -58,23 +56,23 @@ function clearInput() {
 
 <template>
   <div class="row justify-content-center" style="margin: 10% auto">
-    <div class="col-10 col-md-6">
+    <div class="col-10 col-md-5">
       <div class="card">
-        <div class="card-header text-bg-warning mb-1">員工登入</div>
+        <div class="card-header text-bg-success mb-2">員工登入</div>
         <div class="card-body">
-          <!-- <div id="user-input"> -->
-          <div class="input-group">
-            <label for="staticEmail" class="col-sm-2 col-form-label">帳號</label>
-            <input class="form-control" name="account" v-model.trim="account" />
+          <div id="user-input">
+            <div class="input-group">
+              <label for="staticEmail" class="col-sm-4 col-form-label">帳號</label>
+              <input class="form-control" name="account" v-model.trim="account" />
+            </div>
+            <br />
+            <div class="input-group">
+              <label for="staticEmail" class="col-sm-4 col-form-label">密碼</label>
+              <input class="form-control" name="password" v-model.trim="psw" type="password" />
+            </div>
+            <br />
+            <button @click="postUserInput" class="btn btn-success mb-2">登入</button>
           </div>
-          <!-- <br /> -->
-          <div class="input-group">
-            <label for="staticEmail" class="col-sm-2 col-form-label">密碼</label>
-            <input class="form-control" name="password" v-model.trim="psw" type="password" />
-          </div>
-          <br />
-          <button @click="postUserInput" class="btn btn-warning mb-2">登入</button>
-          <!-- </div> -->
         </div>
       </div>
 

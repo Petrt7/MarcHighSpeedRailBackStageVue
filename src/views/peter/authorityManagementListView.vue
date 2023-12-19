@@ -1,31 +1,15 @@
 <template>
     <br />
     <div class="container" style="margin: 10px 37%">
-        <router-link to="/emp/author/emp/add"><button v-if="addEmpSystemAuthorPage" class="btn btn-warning"
+        <router-link to="/emp/author/emp/add"><button v-if="addEmpSystemAuthorPage" class="btn btn-success"
                 style="margin-right: 30px">
                 新增員工權限
             </button></router-link>
-        <router-link to="/emp/author/dept/add"><button v-if="addDeptSystemAuthorPage" class="btn btn-warning">
+        <router-link to="/emp/author/dept/add"><button v-if="addDeptSystemAuthorPage" class="btn btn-success">
                 新增部門權限
             </button></router-link>
     </div>
     <br />
-    <!-- <div class="container" style="margin: 10px 33%">
-        <div v-for="(item, index) in jsonData.data" :key="index">
-            <span>
-                <p class="a" v-if="item.eName">eName: {{ item.eName }}</p>
-            </span>
-            <span>
-                <p class="a" v-if="item.dName">dName: {{ item.dName }}</p>
-            </span>
-            <button @click="toEdit({ item })" class="btn btn-warning" style="margin: 10px 10px">
-                編輯
-            </button>
-            <button @click="deleteById({ item })" class="btn btn-danger" style="margin: 10px 10px">
-                刪除
-            </button>
-        </div>
-    </div> -->
 
     <table class="table">
         <thead>
@@ -77,7 +61,11 @@ const jsonData = reactive({
 });
 
 onMounted(async () => {
-    view(useRoute().path);
+    view(useRoute().path).then((res) => {
+        if (res === false) {
+            router.push("/error");
+        }
+    });
     del(useRoute().path)
         .then((res) => {
             deleteAuthor.value = res;

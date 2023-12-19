@@ -8,7 +8,11 @@ import httpClient from "@/main";
 const leaves = reactive([]);
 
 onMounted(async () => {
-    view(useRoute().path);
+    view(useRoute().path).then((res) => {
+        if (res === false) {
+            router.push("/error");
+        }
+    });
     getAllLeaveKinds();
     getEmp();
 });
@@ -95,28 +99,11 @@ function send() {
         <div class="row align-items-start">
             <div class="col"></div>
             <div class="col">
-                <button @click="send" class="btn btn-outline-primary">送出</button>
+                <button @click="send" class="btn btn-outline-success">送出</button>
             </div>
             <div class="col"></div>
         </div>
     </div>
-
-    <!-- <div>請假事由<input type="text" v-model="employeeLeave.reason" /></div>
-    <div>
-        假別
-        <select class="form-select" v-model="employeeLeave.leaveKind">
-            <option v-for="(leave, index) in leaves.values">
-                {{ leave.leaveName }}
-            </option>
-        </select>
-    </div>
-
-    <label>請假起始時間：</label>
-    <input type="datetime-local" v-model="employeeLeave.startTime" />
-    <label>請假結束時間：</label>
-    <input type="datetime-local" v-model="employeeLeave.endTime" />
-
-    <button @click="send">送出</button> -->
 </template>
 
 <style></style>

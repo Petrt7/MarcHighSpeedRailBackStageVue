@@ -1,39 +1,48 @@
 <template>
-    <div>
-        <div v-for="(item, index) in jsonData.data" :key="index">
-            <!-- <p v-if="item.eId">eId: {{ item.eId }}</p>
+    <div style="margin-top: 10px; margin-left: 33%">
+        <div>
+            <div v-for="(item, index) in jsonData.data" :key="index">
+                <!-- <p v-if="item.eId">eId: {{ item.eId }}</p>
             <p v-if="item.dId">dId: {{ item.dId }}</p> -->
-            <div v-if="item.saString">
-                <p>系統權限:</p>
-                <ul>
-                    <li v-for="(values, key) in saStringRef.authorJson" :key="key" class="li">
-                        <span class="title">{{ saStringRef.systemList[key - 1].systemName }}</span>
+                <div v-if="item.saString">
+                    <p>系統權限:</p>
+                    <ul>
+                        <li v-for="(values, key) in saStringRef.authorJson" :key="key" class="li">
+                            <span class="title">{{ saStringRef.systemList[key - 1].systemName }}</span>
 
-                        <!-- 使用 checkbox 進行綁定 -->
-                        <label v-for="(value, checkboxIndex) in values" :key="checkboxIndex" class="reverse">
-                            <span v-if="checkboxIndex == 0">查看</span>
-                            <span v-if="checkboxIndex == 1">新增</span>
-                            <span v-if="checkboxIndex == 2">搜尋</span>
-                            <span v-if="checkboxIndex == 3">修改</span>
-                            <span v-if="checkboxIndex == 4">刪除</span>
-                            <input type="checkbox" :value="value" v-model="saStringRef.authorJson[key][checkboxIndex]" />
-                        </label>
-                    </li>
-                </ul>
+                            <!-- 使用 checkbox 進行綁定 -->
+                            <label v-for="(value, checkboxIndex) in values" :key="checkboxIndex" class="reverse">
+                                <span v-if="checkboxIndex == 0">查看</span>
+                                <span v-if="checkboxIndex == 1">新增</span>
+                                <span v-if="checkboxIndex == 2">搜尋</span>
+                                <span v-if="checkboxIndex == 3">修改</span>
+                                <span v-if="checkboxIndex == 4">刪除</span>
+                                <input type="checkbox" :value="value"
+                                    v-model="saStringRef.authorJson[key][checkboxIndex]" />
+                            </label>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
+        <button @click="updateEmployeeSystemAuthor" class="btn btn-outline-success" style="margin: 10px">
+            更新
+        </button>
+        {{ message }}
     </div>
-    <button @click="updateEmployeeSystemAuthor">更新</button>
 </template>
 
 <script setup>
 import { ref, reactive, toRefs, onMounted } from "vue";
 import router from "../../router";
 import { useRoute, useRouter } from "vue-router";
-import { view } from "@/audit";
+import { view, update } from "@/audit";
 import httpClient from "@/main";
 
 const route = useRoute();
+const judgeUpdate = ref(false);
+const message = ref("");
+const pagePath = useRoute().path;
 
 // const id = ref(route.query.id);
 
@@ -47,13 +56,16 @@ const saStringRef = reactive({
 });
 
 onMounted(async () => {
-    view(useRoute().path);
+    view(useRoute().path).then((res) => {
+        if (res === false) {
+            router.push("/error");
+        }
+    });
     getAllSystemAuthors();
 });
 
 async function getAllSystemAuthors() {
     try {
-        // const response = await httpClient.get("/system-author/all");
         const response = await httpClient.get(`/system-author/emp/${route.query.id}`);
         jsonData.data = response.data;
 
@@ -75,9 +87,6 @@ async function getAllSystemAuthors() {
         console.error("Error fetching data:", error);
     }
 
-    // console.log(saStringRef.authorJson);
-    // console.log(saStringRef.systemList);
-
     let a;
 
     //把1轉成true，0轉成false
@@ -85,17 +94,27 @@ async function getAllSystemAuthors() {
         saStringRef.authorJson[a].forEach((value, index) => {
             if (value === 1) {
                 saStringRef.authorJson[a][index] = true;
-                // value = 1;
             } else if (value === 0) {
                 saStringRef.authorJson[a][index] = false;
-                // value = 0;
             }
         });
     }
 }
 
-function updateEmployeeSystemAuthor() {
-    // httpClient.get("/system-author/emp/1").then((res) => {
+async function updateEmployeeSystemAuthor() {
+    await update(pagePath)
+        .then((res) => {
+            judgeUpdate.value = res;
+        })
+        .catch((err) => {
+            judgeUpdate.value = err;
+        });
+
+    if (!judgeUpdate.value) {
+        message.value = "沒有此權限";
+        return;
+    }
+
     httpClient
         .get(`/system-author/emp/${route.query.id}`)
         .then((res) => {
@@ -114,7 +133,6 @@ function updateEmployeeSystemAuthor() {
             }
             saString.authorJson = saStringRef.authorJson;
             saString.systemList = saStringRef.systemList;
-            console.log(saString);
             httpClient.put(`/system-author/emp/${route.query.id}`, {
                 saString,
             });
