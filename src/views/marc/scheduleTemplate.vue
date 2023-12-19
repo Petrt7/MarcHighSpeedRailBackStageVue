@@ -121,6 +121,33 @@ function addScheduleTemplate(){
         msg.value='add schedule Template failed'
     })
 }
+function removeScheduleTemplate( schtid){
+    httpClient.post('removeScheduleTemplate/'+schtid).then(res=>{
+        console.log( res)
+        if( res.status ==  200){
+            // clear exist scheTemplate res
+            while( allScheduleTemplate.length > 0 ){
+                allScheduleTemplate.pop();
+            }
+
+            httpClient.get('/getAllScheduleTemplate').then(res=>{
+                if( res.status==200){
+                    // console.log( res.data)
+                    for( let scht of res.data){
+                        allScheduleTemplate.push({
+                            scheduleTemplateId: scht.scheduleTemplateId,
+                            train: scht.train,
+                            railRoute: scht.railRoute,
+                            departTime: scht.departTime,
+                            destinateTime: scht.destinateTime,
+                            costMinute: scht.costMinute
+                        })
+                    }
+                }
+            })
+        }
+    })
+}
 </script>
 <template>
     <div class="container">
@@ -178,7 +205,11 @@ function addScheduleTemplate(){
                     <td>{{  scht.departTime }}</td>
                     <td>{{  scht.destinateTime }}</td>
                     <td>{{  scht.costMinute }}</td>
-                    <td><button class="btn btn-primary" @click="router.push('/schedule/implScheduleTemplate/'+scht.scheduleTemplateId)">安排班次</button></td>
+                    <td>
+                        <div class="input-group" >
+                            <button class="btn btn-primary" @click="router.push('/schedule/implScheduleTemplate/'+scht.scheduleTemplateId)">安排班次</button><button  @click="removeScheduleTemplate(scht.scheduleTemplateId)" class="btn btn-danger ">移除</button>
+                        </div>
+                    </td>
                 </tr>
             </tbody>
         </table>
