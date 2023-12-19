@@ -81,10 +81,6 @@ const path = useRoute().path;
               </li>
             </ul>
           </li>
-        </ul>
-      </div>
-      <div class="collapse navbar-collapse" id="mynavbar">
-        <ul class="navbar-nav me-auto">
           <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
@@ -112,6 +108,10 @@ const path = useRoute().path;
           </li>
         </ul>
       </div>
+      <!-- <div class="collapse navbar-collapse" id="mynavbar">
+        <ul class="navbar-nav me-auto">
+        </ul>
+      </div> -->
     </div>
   </nav>
   <section class="main-container">
@@ -126,15 +126,8 @@ const path = useRoute().path;
 div {
   margin: 0;
 }
-.container {
-  margin: 20px;
-}
 .dropdown-menu {
   background-color: #198754;
   --bs-dropdown-link-hover-bg: #1cc91c;
-}
-.main-container{
-  display: flex;
-  justify-content: center;
 }
 </style>
