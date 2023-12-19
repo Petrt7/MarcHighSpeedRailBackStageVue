@@ -1,25 +1,32 @@
 <script setup>
-import { RouterLink, RouterView, useRoute } from "vue-router";
-import { watch } from "vue";
+import { onUpdated, ref } from "vue";
+import { RouterView, useRoute } from "vue-router";
+import navbar from "./components/navbar.vue";
+import httpClient from "@/main";
+import "./audit";
 
 const path = useRoute().path;
+
+const login = ref("");
+
+onUpdated(() => { });
+
+function test() {
+  httpClient
+    .get("/employee/dto")
+    .then((res) => {
+      login.value = res.data.id;
+      // console.log(res.data);
+      console.log(login);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
 </script>
 
 <template>
-  <nav class="navbar navbar-expand-sm navbar-dark bg-warning">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/emp/index">
-        <!-- <router-link to="/emp/index"> Taiwan High SpeedRail</router-link> -->
-        Taiwan High SpeedRail
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="mynavbar">
-        <ul class="navbar-nav me-auto"></ul>
-      </div>
-    </div>
-  </nav>
+  <navbar></navbar>
   <section>
     <router-view></router-view>
   </section>

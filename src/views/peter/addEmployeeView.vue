@@ -1,7 +1,9 @@
 <script setup>
 import { onUpdated, onMounted, ref, reactive } from "vue";
+import { RouterLink, RouterView, useRoute } from "vue-router";
 import httpClient from "@/main";
 import router from "../../router";
+import { view } from "@/audit";
 // import bootstrap from "bootstrap";
 
 const depts = ref([]);
@@ -77,6 +79,7 @@ const empECP = reactive({
 });
 
 onMounted(() => {
+    view(useRoute().path);
     getdept();
     getTitle();
 });

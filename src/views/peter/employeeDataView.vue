@@ -151,6 +151,7 @@
 import { onMounted, reactive, ref } from "vue";
 import router from "../../router";
 import { useRoute, useRouter } from "vue-router";
+import { view } from "@/audit";
 import httpClient from "@/main";
 const route = useRoute();
 
@@ -180,6 +181,7 @@ const empTitle = reactive({
 });
 
 onMounted(() => {
+    view(useRoute().path);
     getemp();
     getdept();
     getTitle();

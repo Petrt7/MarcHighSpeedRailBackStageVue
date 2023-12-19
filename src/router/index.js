@@ -6,6 +6,15 @@ import empListView from '../views/peter/employeeListView.vue'
 import attendanceListView from '../views/peter/attendanceListView.vue'
 import addEmployeeView from '../views/peter/addEmployeeView.vue'
 import employeeDataView from '../views/peter/employeeDataView.vue'
+import authorListView from '../views/peter/authorityManagementListView.vue'
+import employeeAuthorEditView from '../views/peter/authorityManagementEmployeeEditView.vue'
+import departmentAuthorEditView from '../views/peter/authorityManagementDepartmentEditView.vue'
+import addEmpSystemAuthorView from '../views/peter/addEmployeeSystemAuthorView.vue'
+import addDeptSystemAuthorView from '../views/peter/addDepartmentSystemAuthorView.vue'
+import leaveApplyView from '../views/peter/employeeLeaveApplyView.vue'
+import leaveAuditView from '../views/peter/leaveAuditView.vue'
+import carryForwardListView from '../views/peter/carryForwardList.vue'
+import errorView from '../views/peter/401ErrorView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -44,6 +53,51 @@ const router = createRouter({
       path: '/emp/hrms/emp_data',
       name: 'employeeDataPage',
       component: employeeDataView
+    },
+    {
+      path: '/emp/author/list',
+      name: 'authorListPage',
+      component: authorListView
+    },
+    {
+      path: '/emp/author/emp/edit',
+      name: 'employeeAuthorEditPage',
+      component: employeeAuthorEditView
+    },
+    {
+      path: '/emp/author/dept/edit',
+      name: 'departmentAuthorEditPage',
+      component: departmentAuthorEditView
+    },
+    {
+      path: '/emp/author/emp/add',
+      name: 'addEmpSystemAuthorPage',
+      component: addEmpSystemAuthorView
+    },
+    {
+      path: '/emp/author/dept/add',
+      name: 'addDeptSystemAuthorPage',
+      component: addDeptSystemAuthorView
+    },
+    {
+      path: '/emp/leave/apply',
+      name: 'leaveApplyPage',
+      component: leaveApplyView
+    },
+    {
+      path: '/emp/leave/audit',
+      name: 'leaveAuditPage',
+      component: leaveAuditView
+    },
+    {
+      path: '/emp/carry-forward/list',
+      name: 'carryForwardListPage',
+      component: carryForwardListView
+    },
+    {
+      path: '/error',
+      name: 'errorPage',
+      component: errorView
     }
   ]
 })

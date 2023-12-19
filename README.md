@@ -10,6 +10,7 @@ This template should help get you started developing with Vue 3 in Vite.
 #5. npm install image-size
 #6. npm install image-conversion
 #7. npm install buffer
+#8. npm install @vuepic/vue-datepicker
 #9. 創建.env.loacl 裡面寫上: # 專案axios用基礎路徑 VITE_AXIOS_HTTP_BASEURL=http://localhost:8080/MarcHighSpeedRail
 
 ## Recommended IDE Setup

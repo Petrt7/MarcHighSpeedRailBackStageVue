@@ -1,0 +1,122 @@
+<script setup>
+import { ref, reactive, onMounted } from "vue";
+import { RouterLink, RouterView, useRoute } from "vue-router";
+import { view } from "@/audit";
+import router from "../../router";
+import httpClient from "@/main";
+
+const leaves = reactive([]);
+
+onMounted(async () => {
+    view(useRoute().path);
+    getAllLeaveKinds();
+    getEmp();
+});
+
+const employeeLeave = reactive({
+    leaveKind: "",
+    reason: "",
+    startTime: new Date(),
+    endTime: new Date(),
+    managerId: 1,
+    employeeId: 1,
+});
+
+function getAllLeaveKinds() {
+    httpClient.get("/leave/all").then((res) => {
+        leaves.values = res.data;
+    });
+}
+
+function getEmp() {
+    httpClient.get("/employee/dto").then((res) => {
+        console.log(res.data);
+        employeeLeave.employeeId = res.data.id;
+    });
+}
+
+function send() {
+    httpClient
+        .post("/employee/leave", employeeLeave)
+        .then((res) => {
+            router.push("/emp/index");
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+}
+</script>
+<template>
+    <div class="container text-center">
+        <div class="row align-items-start">
+            <div class="col"></div>
+            <div class="col">
+                請假事由<br /><input type="text" v-model="employeeLeave.reason" class="form-control" />
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+    <div class="container text-center">
+        <div class="row align-items-start">
+            <div class="col"></div>
+            <div class="col">
+                假別
+                <select class="form-select" v-model="employeeLeave.leaveKind">
+                    <option v-for="(leave, index) in leaves.values">
+                        {{ leave.leaveName }}
+                    </option>
+                </select>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+    <div class="container text-center">
+        <div class="row align-items-start">
+            <div class="col"></div>
+            <div class="col">
+                <label>請假起始時間：</label>
+                <input type="datetime-local" v-model="employeeLeave.startTime" />
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+    <div class="container text-center">
+        <div class="row align-items-start">
+            <div class="col"></div>
+            <div class="col">
+                <label>請假結束時間：</label>
+                <input type="datetime-local" v-model="employeeLeave.endTime" />
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+
+    <div class="container text-center">
+        <div class="row align-items-start">
+            <div class="col"></div>
+            <div class="col">
+                <button @click="send" class="btn btn-outline-primary">送出</button>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+
+    <!-- <div>請假事由<input type="text" v-model="employeeLeave.reason" /></div>
+    <div>
+        假別
+        <select class="form-select" v-model="employeeLeave.leaveKind">
+            <option v-for="(leave, index) in leaves.values">
+                {{ leave.leaveName }}
+            </option>
+        </select>
+    </div>
+
+    <label>請假起始時間：</label>
+    <input type="datetime-local" v-model="employeeLeave.startTime" />
+    <label>請假結束時間：</label>
+    <input type="datetime-local" v-model="employeeLeave.endTime" />
+
+    <button @click="send">送出</button> -->
+</template>
+
+<style></style>
