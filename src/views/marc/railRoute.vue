@@ -83,9 +83,7 @@ function addNewRailRoute(){
     dto.stationCnt = toAddedRailRouteStopStation.length
     console.log(dto)
     httpClient.post('/backEndInsertRailRoute',dto).then(res=>{
-        console.log(res.date)
-    }).then(function(){
-        // clear toAddstopStation
+        console.log(res)
         while( toAddedRailRouteStopStation.length>0){
             toAddedRailRouteStopStation.pop();
         }
@@ -98,10 +96,10 @@ function addNewRailRoute(){
         })
         // refresh railRoutes
         httpClient.get('/getAllRoute').then((res)=>{
-        console.log( res.data)
-        for( let rr of res.data){
-            railRoutes.push(rr)
-        }
+            console.log( res.data)
+            for( let rr of res.data){
+                railRoutes.push(rr)
+            }
         })
     })
     .catch(err=>{
@@ -110,6 +108,7 @@ function addNewRailRoute(){
 }
 </script>
 <template>
+<div class="container">
     <div class="card card-body">
         <div class="btn-group" role="group" >
         <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
@@ -127,14 +126,14 @@ function addNewRailRoute(){
             <li v-for="(stst,idx) of toAddedRailRouteStopStation" :key="stst.station.stationId" style="list-style-type: none;" class="stop-station-box">
 
                     <div class="input-group" style="width:75%;margin-right: 0px;" >
-                        <span class="input-group-text" id="inputGroup-sizing-sm">路線序號{{ idx }}</span>
+                        <span class="input-group-text" id="inputGroup-sizing-sm">{{ idx }}</span>
                         <span class="input-group-text" id="inputGroup-sizing-sm">停靠車站</span>
                         <select class="form-select "  v-model="toAddedRailRouteStopStation[idx].station" aria-label="Default select example"><!--v-model="selectedStation[idx]"-->
                             <option v-for="st of allStations" :key="st.stationid" :value="st">{{ st.stationName }}</option>
                         </select>
-                        <span class="input-group-text" id="inputGroup-sizing-sm">花費時間</span>
+                        <span class="input-group-text" id="inputGroup-sizing-sm">到達時間（分鐘）</span>
                         <input v-model="toAddedRailRouteStopStation[idx].costTime" type="number" min="0" step="10" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                        <span class="input-group-text" id="inputGroup-sizing-sm" >間距價格</span>
+                        <span class="input-group-text" id="inputGroup-sizing-sm" >與上一站間的票價</span>
                         <input v-model="toAddedRailRouteStopStation[idx].preToCurrStPrice" type="number" min="0" step="100" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                     </div>
                     <div class="input-group" style="width: 25%;margin-left:0px">
@@ -159,12 +158,13 @@ function addNewRailRoute(){
             </thead>
             <tbody>
                 <tr v-for="rr of railRoutes" :key="rr.railRouteId">
-                    <td>{{ rr.departStation.stationName }}</td><td>{{ rr.destinateStation.stationName }}</td><td>{{  rr.railRouteId }}</td><td >{{  rr.stopStationCount }}</td>
+                    <td>{{  rr.railRouteId }}</td>
+                    <td>{{ rr.departStation.stationName }}</td><td>{{ rr.destinateStation.stationName }}</td><td >{{  rr.stopStationCount }}</td>
                 </tr>
             </tbody>
         </table>
     </div>
-
+</div>
 </template>
 <style>
 .stop-station-box{

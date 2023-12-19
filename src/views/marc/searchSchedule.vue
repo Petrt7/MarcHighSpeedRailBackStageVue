@@ -35,7 +35,7 @@ function search(){
                 'getOnStation' : sch.getOnStation,
                 'getOffStation': sch.getOffStation,
                 'getOnTime': sch.getOnTime,
-                'getOffTime': sch.getOfftime,
+                'getOffTime': sch.getOffTime,
                 'durationMinute': sch.durationMinute
             })
         }

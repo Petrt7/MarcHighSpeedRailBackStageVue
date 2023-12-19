@@ -114,7 +114,7 @@ const path = useRoute().path;
       </div>
     </div>
   </nav>
-  <section>
+  <section class="main-container">
     <router-view></router-view>
   </section>
 </template>
@@ -132,5 +132,9 @@ div {
 .dropdown-menu {
   background-color: #198754;
   --bs-dropdown-link-hover-bg: #1cc91c;
+}
+.main-container{
+  display: flex;
+  justify-content: center;
 }
 </style>

@@ -12,6 +12,13 @@ const allDiscount = reactive([{
     'ticketDiscountId':'all',
     'ticketDiscountName':'全部'
 }])
+const mode = computed(()=>{
+    if(interValMode.value == true){
+        return '間隔模式'
+    }
+    return '一般模式'
+})
+const interValMode = ref(false)
 const getOnStationId = ref(null)
 const getOffStationId = ref(null)
 const selectDiscountId = ref('')
@@ -20,6 +27,19 @@ const discMap = reactive({})
 const schRestSeats = reactive([])
 const filterSchRestSeats = computed(()=>{
     let res = schRestSeats
+    let seqMap = {}
+    for( let i = 1; i<allStopStation.length; i++){
+        seqMap[allStopStation[i].stopStation.stationId] = i
+    }
+    if( interValMode.value == true){
+        res = res.filter( srs =>{
+            // find endst idx -  startst idx ==1
+            if( seqMap[srs.startStationId] == seqMap[srs.endStationId]-1) return true
+            return false;
+        })
+    }
+
+
     if( getOnStationId.value!=='all'){
         res = res.filter(srs => srs.startStationId== getOnStationId.value)
     }
@@ -68,6 +88,7 @@ onBeforeMount(()=>{
         <div class="col">
             <div class="input-group">
                 <button class="btn btn-outline-secondary" @click="$router.push('/schedule/searchSchedule')">回上一頁</button>
+                <button class="btn btn-outline-secondary" @click="interValMode=(interValMode==true)?false:true">{{ mode }}</button>
             </div>
         </div>
     </div>

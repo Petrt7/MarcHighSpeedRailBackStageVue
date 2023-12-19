@@ -18,15 +18,20 @@ function addTrainAndRefresh(){
         trains.pop();
     }
     // to add train [[ wait to complete ]]
-
+    httpClient.post( '/insertTrain',{
+        trainType: inputTrainType.value,
+        trainDescription: inputTrainDescript.value
+    }).then(res=>{
+        console.log( res);
+        httpClient.get('/getAllTrain').then((res)=>{
+            console.log(res.data)
+            for( let t of res.data){
+                trains.push( t)
+            }
+        })
+    }).catch(err=>console.log(err))
     //
 
-    httpClient.get('/getAllTrain').then((res)=>{
-        console.log(res.data)
-        for( let t of res.data){
-            trains.push( t)
-        }
-    })
 }
 </script>
 <template>
@@ -34,11 +39,11 @@ function addTrainAndRefresh(){
         <div class="row">
             <div class="col-4">
                 <label for="insertTrainType" class="form-label">列車系列</label>
-                <input type="text" :value="inputTrainType" class="form-control" id="insertTrainType" placeholder="新增列車系列">
+                <input type="text" v-model="inputTrainType" class="form-control" id="insertTrainType" placeholder="新增列車系列">
             </div>
             <div class="col-4">
                 <label for="insertTrainDescript" class="form-label">列車敘述</label>
-                <input type="text" :value="inputTrainDescript" class="form-control" id="insertTrainDescript" placeholder="新增列車敘述">
+                <input type="text" v-model="inputTrainDescript" class="form-control" id="insertTrainDescript" placeholder="新增列車敘述">
             </div>
             <div class="col-2">
                 <button @click="addTrainAndRefresh" type="button" class="btn btn-primary">新增列車</button>
