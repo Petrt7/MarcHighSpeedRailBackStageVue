@@ -27,6 +27,7 @@ import scheduleRestSeat from '../views/marc/scheduleRestSeat.vue'
 import sluicegate from '../views/marc/sluicegate.vue'
 // wowowork back stage component
 import lostAdd from '../views/wowowork/lostAdd.vue'
+import lostAll from '../views/wowowork/lostAll.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -147,6 +148,11 @@ const router = createRouter({
     {
       path: '/lostParadise/lostAdd',
       component: lostAdd,
+
+    },
+    {
+      path: '/lostParadise/lostAll',
+      component: lostAll,
 
     }
   ]
