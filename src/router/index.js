@@ -24,6 +24,7 @@ import scheduleTemplateBackStage from '../views/marc/scheduleTemplate.vue'
 import implScheduleTemplate from '../views/marc/implScheduleTemplate.vue'
 import searchScheudle from '../views/marc/searchSchedule.vue'
 import scheduleRestSeat from '../views/marc/scheduleRestSeat.vue'
+import sluicegate from '../views/marc/sluicegate.vue'
 // wowowork back stage component
 import lostAdd from '../views/wowowork/lostAdd.vue'
 const router = createRouter({
@@ -138,6 +139,10 @@ const router = createRouter({
       component: scheduleRestSeat,
       props: true
 
+    },
+    {
+      path: '/ticket/sluicegate',
+      component: sluicegate,
     },
     {
       path: '/lostParadise/lostAdd',
