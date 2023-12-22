@@ -6,7 +6,7 @@ const path = useRoute().path;
 </script>
 
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-success" id="backNavBar">
     <div class="container-fluid">
       <a class="navbar-brand" href="/emp/index">
         <!-- <router-link to="/emp/index"> Taiwan High SpeedRail</router-link> -->
@@ -76,15 +76,21 @@ const path = useRoute().path;
               </li>
               <li>
                 <button class="dropdown-item">
-                  <router-link to="/schedule/searchSchedule" class="nav-link" id="fontcolor">班次搜尋</router-link >
+                  <router-link
+                    to="/schedule/searchSchedule"
+                    class="nav-link"
+                    id="fontcolor"
+                    >班次搜尋</router-link
+                  >
+                </button>
+              </li>
+              <li>
+                <button class="dropdown-item">
+                  <router-link to="/ticket/sluicegate" class="nav-link" id="fontcolor">虛擬驗票閘門</router-link >
                 </button>
               </li>
             </ul>
           </li>
-        </ul>
-      </div>
-      <div class="collapse navbar-collapse" id="mynavbar">
-        <ul class="navbar-nav me-auto">
           <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
@@ -106,15 +112,26 @@ const path = useRoute().path;
                     >新增遺失物</router-link
                   >
                 </button>
+                <button class="dropdown-item">
+                  <router-link
+                    to="/lostParadise/lostAll"
+                    id="fontcolor"
+                    class="nav-link"
+                    >遺失物列表</router-link
+                  >
+                </button>
               </li>
-              
             </ul>
           </li>
         </ul>
       </div>
+      <!-- <div class="collapse navbar-collapse" id="mynavbar">
+        <ul class="navbar-nav me-auto">
+        </ul>
+      </div> -->
     </div>
   </nav>
-  <section>
+  <section class="main-container">
     <router-view></router-view>
   </section>
 </template>
@@ -126,11 +143,13 @@ const path = useRoute().path;
 div {
   margin: 0;
 }
-.container {
-  margin: 20px;
-}
 .dropdown-menu {
   background-color: #198754;
   --bs-dropdown-link-hover-bg: #1cc91c;
+}
+#backNavBar {
+  /* border: 3px solid orange; */
+  width: 100%;
+  margin-bottom: 20px;
 }
 </style>

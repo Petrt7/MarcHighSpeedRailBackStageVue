@@ -26,8 +26,10 @@ import scheduleTemplateBackStage from '../views/marc/scheduleTemplate.vue'
 import implScheduleTemplate from '../views/marc/implScheduleTemplate.vue'
 import searchScheudle from '../views/marc/searchSchedule.vue'
 import scheduleRestSeat from '../views/marc/scheduleRestSeat.vue'
+import sluicegate from '../views/marc/sluicegate.vue'
 // wowowork back stage component
 import lostAdd from '../views/wowowork/lostAdd.vue'
+import lostAll from '../views/wowowork/lostAll.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -142,6 +144,10 @@ const router = createRouter({
 
     },
     {
+      path: '/ticket/sluicegate',
+      component: sluicegate,
+    },
+    {
       path: '/lostParadise/lostAdd',
       component: lostAdd,
 
@@ -155,6 +161,9 @@ const router = createRouter({
       path: '/emp/psw/edit',
       name: 'employeePasswordEditPage',
       component: employeePasswordEditView
+      path: '/lostParadise/lostAll',
+      component: lostAll,
+
     }
   ]
 })

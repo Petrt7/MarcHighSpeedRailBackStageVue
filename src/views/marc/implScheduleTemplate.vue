@@ -12,6 +12,7 @@ const selectMonth = ref(new Date().getMonth()+1)
 const selectDay = ref(new Date().getDate())
 const discSeatRange = reactive([])
 const msg = ref('')
+const loading = ref(false)
 function isSartRange(idx){
     return idx==0
 }
@@ -33,6 +34,8 @@ function removeSeatRange(idx){
     discSeatRange[discSeatRange.length-1].seatEnd = trainSeatMaxRange
 }
 function implScheduleTemplate(){
+    loading.value = true;
+    
     msg.value= '';
     // check input not empty 
     for( let ds of discSeatRange){
@@ -71,9 +74,11 @@ function implScheduleTemplate(){
         }else{
             msg.value='新增班次失敗'
         }
+        loading.value = false;
     }).catch(err=>{
         console.log(err)
         msg.value= 'implement schedule failed'
+        loading.value = false;
     })
 }
 onBeforeMount(() => {
@@ -110,7 +115,19 @@ onBeforeMount(() => {
 </script>
 <template>
     <div class="container">
-        <h3>{{ msg }}</h3>
+        <div class="row" v-if="loading">
+            <div class="col" style="display: flex;justify-content: space-between;margin: 5% 20%;">
+                <div class="spinner-grow text-secondary" role="status"><span class="visually-hidden">Loading...</span></div>
+                <div class="spinner-grow text-secondary" role="status"><span class="visually-hidden">Loading...</span></div>
+                <div class="spinner-grow text-secondary" role="status"><span class="visually-hidden">Loading...</span></div>
+                <div class="spinner-grow text-secondary" role="status"><span class="visually-hidden">Loading...</span></div>
+                <div class="spinner-grow text-secondary" role="status"><span class="visually-hidden">Loading...</span></div>
+                <div class="spinner-grow text-secondary" role="status"><span class="visually-hidden">Loading...</span></div>
+            </div>
+        </div>
+        <div v-else class="row">
+            <h3>{{  msg }}</h3>
+        </div>
         <div class="row">
             <div class="col-1">
                 <button @click="router.push('/schedule/scheduleTemplate')" class="btn btn-outline-secondary">回上一頁</button>
