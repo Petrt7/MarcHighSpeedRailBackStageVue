@@ -5,6 +5,11 @@ import { view } from "@/audit";
 import httpClient from "@/main";
 import router from "../../router";
 
+// Initialization for ES Users
+// import { Popover, initMDB } from "mdb-ui-kit";
+
+// initMDB({ Popover });
+
 const judgeAuthorListPage = ref(false);
 const judgeHrmsView = ref(false);
 const judgeLeaveApplyView = ref(false);
@@ -95,7 +100,11 @@ function logout() {
                             請假審核
                         </button></router-link>
                 </div>
-                <div class="col"></div>
+                <div class="col">
+                    <router-link to="/emp/acc/list"><button v-if="leaveAuditView" class="btn btn-success btn-lg">
+                            員工帳號密碼管理
+                        </button></router-link>
+                </div>
                 <div class="col"></div>
             </div>
         </div>
