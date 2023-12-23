@@ -5,7 +5,7 @@
       <form @submit.prevent="postLostItem">
         <h1>新增遺失物</h1>
         <div class="mb-3">
-          <label for="tripId" class="form-label">撿拾到的車次</label>
+          <label for="tripId" class="form-label">拾獲車次</label>
           <input
             v-model="LostProperty.tripId"
             type="number"
@@ -14,7 +14,7 @@
           />
         </div>
         <div class="mb-3">
-          <label for="stationName" class="form-label">撿拾到的站名</label>
+          <label for="stationName" class="form-label">拾獲站名</label>
           <select
             v-model="LostProperty.stationName"
             type="text"
@@ -36,7 +36,9 @@
           </select>
         </div>
         <div class="mb-3">
-          <label for="findDate" class="form-label">撿拾到的日子</label>
+          <label for="findDate" class="form-label"
+            ><span>*</span>拾獲日期</label
+          >
           <input
             v-model="LostProperty.findDate"
             type="date"
@@ -46,7 +48,9 @@
           />
         </div>
         <div class="mb-3">
-          <label for="stayStation" class="form-label">遺失物存放車站</label>
+          <label for="stayStation" class="form-label"
+            ><span>*</span>遺失物存放車站</label
+          >
           <select
             v-model="LostProperty.stayStation"
             type="text"
@@ -70,27 +74,35 @@
           </select>
         </div>
         <div class="mb-3">
-          <label for="simpleOutward" class="form-label">物品名稱</label>
+          <label for="simpleOutward" class="form-label"
+            ><span>*</span>物品名稱</label
+          >
           <input
             v-model="LostProperty.simpleOutward"
             type="text"
             class="form-control"
             id="simpleOutward"
+            placeholder="例如：行李箱"
             required
           />
         </div>
         <div class="mb-3">
-          <label for="detailOutward" class="form-label">物品詳細外觀</label>
+          <label for="detailOutward" class="form-label"
+            ><span>*</span>物品詳細外觀</label
+          >
           <textarea
             v-model="LostProperty.detailOutward"
             class="form-control"
             id="detailOutward"
             rows="3"
+            placeholder="例如：黃色的行李箱、有寶貝球的吊飾、裡面有換洗衣物、姓名為黃光宙、身分證為A123456789"
             required
           ></textarea>
         </div>
         <div class="mb-3">
-          <label for="lostPhoto" class="form-label">遺失物圖片上傳</label>
+          <label for="lostPhoto" class="form-label"
+            ><span>*</span>遺失物圖片上傳
+          </label>
           <input
             type="file"
             @change="handleFileChange"
@@ -110,11 +122,17 @@
 <script setup>
 import { reactive } from "vue";
 import httpClient from "@/main";
+import router from "../../router";
 
 const LostProperty = reactive({
   tripId: "",
   stationName: "",
-  findDate: "",
+  findDate:
+    new Date().getFullYear() +
+    "-" +
+    (new Date().getMonth() + 1) +
+    "-" +
+    new Date().getDate(),
   stayStation: "",
   simpleOutward: "",
   detailOutward: "",
@@ -136,6 +154,7 @@ const postLostItem = function () {
     })
     .then(function (res) {
       console.log("Response:", res.data);
+      router.push("/lostParadise/lostAll");
       // Handle the response as needed
     })
     .catch(function (err) {
@@ -156,5 +175,8 @@ const handleFileChange = (event) => {
   border: 2px solid rgb(188, 188, 188);
   box-shadow: 0px 5px 5px rgb(188, 188, 188);
   padding-bottom: 20px;
+}
+span {
+  color: #00bb3b;
 }
 </style>
