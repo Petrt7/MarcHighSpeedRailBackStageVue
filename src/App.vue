@@ -84,6 +84,11 @@ const path = useRoute().path;
                   >
                 </button>
               </li>
+              <li>
+                <button class="dropdown-item">
+                  <router-link to="/ticket/sluicegate" class="nav-link" id="fontcolor">虛擬驗票閘門</router-link >
+                </button>
+              </li>
             </ul>
           </li>
           <li class="nav-item dropdown">

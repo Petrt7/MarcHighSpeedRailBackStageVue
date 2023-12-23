@@ -15,6 +15,8 @@ import leaveApplyView from '../views/peter/employeeLeaveApplyView.vue'
 import leaveAuditView from '../views/peter/leaveAuditView.vue'
 import carryForwardListView from '../views/peter/carryForwardList.vue'
 import errorView from '../views/peter/401ErrorView.vue'
+import employeeAccountListView from '../views/peter/employeeAccountListView.vue'
+import employeePasswordEditView from '../views/peter/employeePasswordEditView.vue'
 
 // marc back stage component
 import trainBackStage from '../views/marc/train.vue'
@@ -24,6 +26,7 @@ import scheduleTemplateBackStage from '../views/marc/scheduleTemplate.vue'
 import implScheduleTemplate from '../views/marc/implScheduleTemplate.vue'
 import searchScheudle from '../views/marc/searchSchedule.vue'
 import scheduleRestSeat from '../views/marc/scheduleRestSeat.vue'
+import sluicegate from '../views/marc/sluicegate.vue'
 // wowowork back stage component
 import lostAdd from '../views/wowowork/lostAdd.vue'
 import lostAll from '../views/wowowork/lostAll.vue'
@@ -141,11 +144,23 @@ const router = createRouter({
 
     },
     {
+      path: '/ticket/sluicegate',
+      component: sluicegate,
+    },
+    {
       path: '/lostParadise/lostAdd',
       component: lostAdd,
 
     },
     {
+      path: '/emp/acc/list',
+      name: 'employeeAccountListPage',
+      component: employeeAccountListView
+    },
+    {
+      path: '/emp/psw/edit',
+      name: 'employeePasswordEditPage',
+      component: employeePasswordEditView
       path: '/lostParadise/lostAll',
       component: lostAll,
 
