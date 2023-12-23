@@ -17,6 +17,8 @@
                 <th>詳細外觀</th>
                 <th>信件檢查</th>
                 <th>接收檢查</th>
+                <th>遺失物照片</th>
+                <th>修改狀態</th>
               </tr>
             </thead>
             <tbody>
@@ -47,12 +49,29 @@
 import { ref, onMounted } from "vue";
 import httpClient from "@/main";
 const lostProperties = ref([]);
+const lostImage = ref([]);
 
-onMounted(() => {
+function getLostPage() {
   httpClient
     .get("/LostProperty/backend/findAll", lostProperties, {
       headers: {
-        "Content-Type": " application/json", // 設定 Content-Type 為 multipart/form-data
+        "Content-Type": " application/json",
+      },
+    })
+    .then((res) => {
+      console.log(res.data);
+      lostProperties.value = res.data.content;
+    })
+    .catch(function (err) {
+      console.error("Error:", err);
+      // Handle the error as needed
+    });
+}
+function showImage(lpid) {
+  httpClient
+    .get("/LostProperty/backend/updateById/" + lpid, lostImage, {
+      headers: {
+        "Content-Type": "image/jpeg",
       },
     })
     .then((res) => {
@@ -62,5 +81,6 @@ onMounted(() => {
       console.error("Error:", err);
       // Handle the error as needed
     });
-});
+}
+onMounted(getLostPage);
 </script>

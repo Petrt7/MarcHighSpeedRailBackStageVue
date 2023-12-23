@@ -153,6 +153,10 @@ const router = createRouter({
 
     },
     {
+      path: '/lostParadise/lostAll',
+      component: lostAll,
+    },
+    {
       path: '/emp/acc/list',
       name: 'employeeAccountListPage',
       component: employeeAccountListView
@@ -161,9 +165,6 @@ const router = createRouter({
       path: '/emp/psw/edit',
       name: 'employeePasswordEditPage',
       component: employeePasswordEditView
-      path: '/lostParadise/lostAll',
-      component: lostAll,
-
     }
   ]
 })
