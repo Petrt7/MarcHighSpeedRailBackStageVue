@@ -14,7 +14,10 @@ export default defineConfig({
       'vue': 'vue/dist/vue.esm-bundler.js'
     }
   },
-  server: {
-    port: 5175, strictPort: false,
+  server:{
+    host: '0.0.0.0',
+    port: 5175,
+    open: true,
+    https:false,
   }
 })
