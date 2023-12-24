@@ -76,7 +76,7 @@ function clearInput() {
         </div>
       </div>
 
-      <div id="result">{{ result }}</div>
+      <div id="result" style="color: red">{{ result }}</div>
 
       <div id="loginUser">{{ loginUser }}</div>
     </div>
