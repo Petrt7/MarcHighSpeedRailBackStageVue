@@ -3,7 +3,17 @@
     <div class="container mt-4">
       <div class="row">
         <div class="col-md-12">
-          <h2>失物招領列表</h2>
+          <h1>遺失物列表</h1>
+          <div>
+            <h3>應對流程：</h3>
+            <ol>
+              <li>先問領取人要找甚麼物品<br />包含時間和掉落地點或班次</li>
+              <li>
+                逐漸問他詳細物品特徵<br />不能主動回覆特徵<br />不然會有盜領的風險
+              </li>
+            </ol>
+          </div>
+          <div id="photoView"></div>
           <table class="table">
             <thead>
               <tr>
@@ -36,6 +46,62 @@
                 <td>{{ item.detailOutward }}</td>
                 <td>{{ item.letterCheck ? "是" : "否" }}</td>
                 <td>{{ item.receiveCheck ? "是" : "否" }}</td>
+                <td>
+                  <button
+                    type="button"
+                    class="btn btn-warning"
+                    data-bs-toggle="modal"
+                    :data-bs-target="'#photoModal' + item.lostPropertyId"
+                  >
+                    照片
+                  </button>
+
+                  <!-- 照片模態框 -->
+                  <div
+                    class="modal fade"
+                    :id="'photoModal' + item.lostPropertyId"
+                    tabindex="-1"
+                    aria-labelledby="exampleModalLabel"
+                    aria-hidden="true"
+                  >
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">
+                            {{ item.detailOutward }}
+                          </h5>
+                          <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                          ></button>
+                        </div>
+                        <div class="modal-body">
+                          <!-- 顯示照片的 img 標籤 -->
+                          <img
+                            :src="
+                              backendURL +
+                              '/LostProperty/backend/downloadImage/' +
+                              item.lostPropertyId
+                            "
+                            class="card-img-bottom"
+                            alt="item.lostPropertyId"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <button
+                    type="button"
+                    class="btn btn-info"
+                    @click="modifyLostProperty(item.lostPropertyId)"
+                  >
+                    更改
+                  </button>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -48,8 +114,10 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import httpClient from "@/main";
+const backendURL = import.meta.env.VITE_AXIOS_HTTP_BASEURL;
+
 const lostProperties = ref([]);
-const lostImage = ref([]);
+const LostProperty = ref([]);
 
 function getLostPage() {
   httpClient
@@ -68,19 +136,23 @@ function getLostPage() {
     });
 }
 function showImage(lpid) {
+  return backendURL + "/LostProperty/backend/downloadImage/" + lpid;
+}
+function modifyLostProperty(lostPropertyId) {
   httpClient
-    .get("/LostProperty/backend/updateById/" + lpid, lostImage, {
+    .post("/LostProperty/backend/updateById/" + lostPropertyId, LostProperty, {
       headers: {
-        "Content-Type": "image/jpeg",
+        "Content-Type": "multipart/form-data", // 設定 Content-Type 為 multipart/form-data
       },
     })
-    .then((res) => {
-      console.log(res.data);
+    .then(function (res) {
+      console.log("Response:", res.data);
     })
     .catch(function (err) {
       console.error("Error:", err);
       // Handle the error as needed
     });
+  console.log(`Modify lost property with ID: ${lostPropertyId}`);
 }
 onMounted(getLostPage);
 </script>
