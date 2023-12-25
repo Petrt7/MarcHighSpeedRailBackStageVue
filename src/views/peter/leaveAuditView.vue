@@ -44,7 +44,6 @@ function getAudit() {
 function approve(audit) {
     audit.resultSnadDate = new Date().toISOString();
     audit.audit = "success";
-    console.log(audit);
     httpClient
         .put("/employee/leave/audit", audit)
         .then((res) => {
@@ -58,7 +57,14 @@ function approve(audit) {
 function turnDown(audit) {
     audit.resultSnadDate = new Date().toISOString();
     audit.audit = "fail";
-    console.log(audit);
+    httpClient
+        .put("/employee/leave/audit", audit)
+        .then((res) => {
+            getAudit();
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 }
 </script>
 <template>

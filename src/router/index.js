@@ -17,6 +17,7 @@ import carryForwardListView from '../views/peter/carryForwardList.vue'
 import errorView from '../views/peter/401ErrorView.vue'
 import employeeAccountListView from '../views/peter/employeeAccountListView.vue'
 import employeePasswordEditView from '../views/peter/employeePasswordEditView.vue'
+import employeeReadLeaveView from '../views/peter/employeeReadLeaveView.vue'
 
 // marc back stage component
 import trainBackStage from '../views/marc/train.vue'
@@ -30,8 +31,6 @@ import sluicegate from '../views/marc/sluicegate.vue'
 // wowowork back stage component
 import lostAdd from '../views/wowowork/lostAdd.vue'
 import lostAll from '../views/wowowork/lostAll.vue'
-import lostSearch from '../views/wowowork/lostSearch.vue'
-import lostRecord from '../views/wowowork/lostRecord.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -155,18 +154,6 @@ const router = createRouter({
 
     },
     {
-      path: '/lostParadise/lostAll',
-      component: lostAll,
-    },
-    {
-      path: '/lostParadise/lostSearch',
-      component: lostSearch,
-    },
-    {
-      path: '/lostParadise/lostRecord',
-      component: lostRecord,
-    },
-    {
       path: '/emp/acc/list',
       name: 'employeeAccountListPage',
       component: employeeAccountListView
@@ -175,6 +162,15 @@ const router = createRouter({
       path: '/emp/psw/edit',
       name: 'employeePasswordEditPage',
       component: employeePasswordEditView
+    },
+    {
+      path: '/lostParadise/lostAll',
+      component: lostAll,
+    },
+    {
+      path: '/emp/leave/read',
+      name: 'employeeReadLeavePage',
+      component: employeeReadLeaveView
     }
   ]
 })

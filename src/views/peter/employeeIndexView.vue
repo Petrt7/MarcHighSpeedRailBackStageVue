@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, reactive, onMounted } from "vue";
 import { RouterLink, RouterView, useRoute } from "vue-router";
 import { view } from "@/audit";
 import httpClient from "@/main";
@@ -14,6 +14,9 @@ const judgeAuthorListPage = ref(false);
 const judgeHrmsView = ref(false);
 const judgeLeaveApplyView = ref(false);
 const leaveAuditView = ref(false);
+const judgeEmployeeAccountListView = ref(false);
+
+const reads = reactive([]);
 
 onMounted(() => {
     view(useRoute().path).then((res) => {
@@ -30,7 +33,7 @@ onMounted(() => {
             judgeAuthorListPage.value = err;
         });
 
-    view("/emp/hmrs")
+    view("/emp/hrms")
         .then((res) => {
             judgeHrmsView.value = res;
         })
@@ -53,7 +56,30 @@ onMounted(() => {
         .catch((err) => {
             leaveAuditView.value = err;
         });
+    view("/emp/acc/list")
+        .then((res) => {
+            judgeEmployeeAccountListView.value = res;
+        })
+        .catch((err) => {
+            judgeEmployeeAccountListView.value = err;
+        });
+    getAllUnreadLeaves();
 });
+
+function getAllUnreadLeaves() {
+    httpClient
+        .get("/employee/leave/unread", {
+            params: {
+                id: 2,
+            },
+        })
+        .then((res) => {
+            reads.values = res.data;
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+}
 
 function logout() {
     httpClient
@@ -68,11 +94,21 @@ function logout() {
 </script>
 <template>
     <div class="container">
-        <button class="btn btn-outline-success" style="margin-left: 90%" @click="logout">
+        <router-link to="/emp/leave/read"><img v-if="reads.values.length === 0" src="../../assets/img/bell.png"
+                style="width: 25px; margin-left: 90%; cursor: pointer" /></router-link>
+        <router-link to="/emp/leave/read"><img v-if="reads.values.length !== 0" src="../../assets/img/notification.png"
+                style="width: 25px; margin-left: 90%; cursor: pointer" /></router-link>
+
+        <button class="btn btn-outline-success" style="margin-left: 10px" @click="logout">
             登出
         </button>
         <div class="container text-center" style="margin-top: 12%">
             <div class="row align-items-center">
+                <div class="col">
+                    <router-link to="/emp/leave/apply"><button v-if="judgeLeaveApplyView" class="btn btn-success btn-lg">
+                            請假申請
+                        </button></router-link>
+                </div>
                 <div class="col">
                     <router-link to="/emp/author/list"><button v-if="judgeAuthorListPage" class="btn btn-success btn-lg">
                             權限管理
@@ -81,11 +117,6 @@ function logout() {
                 <div class="col">
                     <router-link to="/emp/hrms"><button v-if="judgeHrmsView" class="btn btn-success btn-lg">
                             人資管理
-                        </button></router-link>
-                </div>
-                <div class="col">
-                    <router-link to="/emp/leave/apply"><button v-if="judgeLeaveApplyView" class="btn btn-success btn-lg">
-                            請假申請
                         </button></router-link>
                 </div>
             </div>
@@ -101,7 +132,8 @@ function logout() {
                         </button></router-link>
                 </div>
                 <div class="col">
-                    <router-link to="/emp/acc/list"><button v-if="leaveAuditView" class="btn btn-success btn-lg">
+                    <router-link to="/emp/acc/list"><button v-if="judgeEmployeeAccountListView"
+                            class="btn btn-success btn-lg">
                             員工帳號密碼管理
                         </button></router-link>
                 </div>
