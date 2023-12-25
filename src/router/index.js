@@ -30,6 +30,8 @@ import sluicegate from '../views/marc/sluicegate.vue'
 // wowowork back stage component
 import lostAdd from '../views/wowowork/lostAdd.vue'
 import lostAll from '../views/wowowork/lostAll.vue'
+import lostSearch from '../views/wowowork/lostSearch.vue'
+import lostRecord from '../views/wowowork/lostRecord.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -155,6 +157,14 @@ const router = createRouter({
     {
       path: '/lostParadise/lostAll',
       component: lostAll,
+    },
+    {
+      path: '/lostParadise/lostSearch',
+      component: lostSearch,
+    },
+    {
+      path: '/lostParadise/lostRecord',
+      component: lostRecord,
     },
     {
       path: '/emp/acc/list',

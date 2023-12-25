@@ -86,7 +86,12 @@ const path = useRoute().path;
               </li>
               <li>
                 <button class="dropdown-item">
-                  <router-link to="/ticket/sluicegate" class="nav-link" id="fontcolor">虛擬驗票閘門</router-link >
+                  <router-link
+                    to="/ticket/sluicegate"
+                    class="nav-link"
+                    id="fontcolor"
+                    >虛擬驗票閘門</router-link
+                  >
                 </button>
               </li>
             </ul>
@@ -118,6 +123,22 @@ const path = useRoute().path;
                     id="fontcolor"
                     class="nav-link"
                     >遺失物列表</router-link
+                  >
+                </button>
+                <button class="dropdown-item">
+                  <router-link
+                    to="/lostParadise/lostRecord"
+                    id="fontcolor"
+                    class="nav-link"
+                    >領取紀錄</router-link
+                  >
+                </button>
+                <button class="dropdown-item">
+                  <router-link
+                    to="/lostParadise/lostSearch"
+                    id="fontcolor"
+                    class="nav-link"
+                    >遺失物查詢</router-link
                   >
                 </button>
               </li>
