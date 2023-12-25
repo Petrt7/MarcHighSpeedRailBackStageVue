@@ -19,6 +19,7 @@ const logs = reactive([]);
 function getAllCarryForwards() {
     httpClient.get("/employee/leave/carry-forward").then((res) => {
         logs.values = res.data;
+        console.log(res.data);
     });
 }
 
@@ -53,7 +54,7 @@ function loged(log) {
                 <td>{{ log.reason }}</td>
                 <td><input type="datetime-local" :value="log.startTime" disabled /></td>
                 <td><input type="datetime-local" :value="log.endTime" disabled /></td>
-                <td><button @click="loged(log)">紀錄</button></td>
+                <td><button @click="loged(log)" class="btn btn-outline-success">紀錄</button></td>
             </tr>
         </tbody>
     </table>
