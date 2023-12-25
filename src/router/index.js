@@ -17,6 +17,7 @@ import carryForwardListView from '../views/peter/carryForwardList.vue'
 import errorView from '../views/peter/401ErrorView.vue'
 import employeeAccountListView from '../views/peter/employeeAccountListView.vue'
 import employeePasswordEditView from '../views/peter/employeePasswordEditView.vue'
+import employeeReadLeaveView from '../views/peter/employeeReadLeaveView.vue'
 
 // marc back stage component
 import trainBackStage from '../views/marc/train.vue'
@@ -161,9 +162,15 @@ const router = createRouter({
       path: '/emp/psw/edit',
       name: 'employeePasswordEditPage',
       component: employeePasswordEditView
+    },
+    {
       path: '/lostParadise/lostAll',
       component: lostAll,
-
+    },
+    {
+      path: '/emp/leave/read',
+      name: 'employeeReadLeavePage',
+      component: employeeReadLeaveView
     }
   ]
 })
