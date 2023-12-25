@@ -160,7 +160,7 @@ const router = createRouter({
     {
       path: '/emp/psw/edit',
       name: 'employeePasswordEditPage',
-      component: employeePasswordEditView
+      component: employeePasswordEditView,
       path: '/lostParadise/lostAll',
       component: lostAll,
 
