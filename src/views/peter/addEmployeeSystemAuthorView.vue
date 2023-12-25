@@ -18,7 +18,7 @@
         <ul>
             <li v-for="(system, index) in author.systems" :key="index">
                 <div>
-                    <span class="span">{{ system.systemName }}</span>
+                    <span class="span">{{ system.pageName }}</span>
                     <span>
                         <input type="checkbox" v-model="system.permissions[0]" class="check" /> 查看
                         <input type="checkbox" v-model="system.permissions[1]" class="check" /> 新增

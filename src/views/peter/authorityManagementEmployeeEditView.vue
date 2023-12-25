@@ -8,7 +8,7 @@
                     <p>系統權限:</p>
                     <ul>
                         <li v-for="(values, key) in saStringRef.authorJson" :key="key" class="li">
-                            <span class="title">{{ saStringRef.systemList[key - 1].systemName }}</span>
+                            <span class="title">{{ saStringRef.systemList[key - 1].pageName }}</span>
 
                             <!-- 使用 checkbox 進行綁定 -->
                             <label v-for="(value, checkboxIndex) in values" :key="checkboxIndex" class="reverse">

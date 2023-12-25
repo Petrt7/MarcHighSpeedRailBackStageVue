@@ -54,7 +54,16 @@ function bootWebCam(){
       // state.value = 0;
     }
     html5QrcodeScanner.render(onScanSuccess, onScanFailure);
-    // To use Html5Qrcode (more info below)
+    // // To use Html5Qrcode (more info below)
+    // let cameraId 
+    // navigator.mediaDevices.enumerateDevices().then(function(dev){
+    //   for( var i = 0; i< dev.length; i++){
+    //     var d = dev[i];
+    //     if(d.label == 'C270 HD WEBCAM (046d:0825)')cameraId=d.deviceId
+    //   }
+    //   html5QrcodeScanner.start({ deviceId: { exact: cameraId} }, config, qrCodeSuccessCallback);
+      // })
+    
 }
 onMounted(bootWebCam)
 </script>
