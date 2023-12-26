@@ -44,7 +44,7 @@
                   <input
                     type="text"
                     class="form-control"
-                    id="tripId"
+                    id="tripIdd"
                     v-model="item.tripId"
                   />
                 </td>
@@ -105,7 +105,7 @@
                     type="text"
                     class="form-control"
                     v-model="item.simpleOutward"
-                    id="simpleOutward"
+                    id="simpleOutwardd"
                   />
                 </td>
                 <td v-if="!item.isEditing">{{ item.detailOutward }}</td>
@@ -225,6 +225,57 @@
           </table>
         </div>
       </div>
+      <ul class="pagination">
+        <li class="page-item">
+          <button v-if="currentPageNum == 1" type="button" class="page-link">
+            第一頁
+          </button>
+          <button
+            v-else
+            type="button"
+            class="page-link"
+            @click="goSomePage(currentPageNum - 1, pageContent)"
+          >
+            上一頁
+          </button>
+        </li>
+
+        <li class="page-item" v-for="pageNum in totalPages">
+          <button
+            v-if="currentPageNum == pageNum"
+            type="button"
+            class="page-link active"
+          >
+            {{ pageNum }}
+          </button>
+          <button
+            v-else
+            type="button"
+            class="page-link"
+            @click="goSomePage(pageNum, pageContent)"
+          >
+            {{ pageNum }}
+          </button>
+        </li>
+
+        <li class="page-item">
+          <button
+            v-if="currentPageNum == totalPages"
+            type="button"
+            class="page-link"
+          >
+            最後一頁
+          </button>
+          <button
+            v-else
+            type="button"
+            class="page-link"
+            @click="goSomePage(currentPageNum + 1, pageContent)"
+          >
+            下一頁
+          </button>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -233,6 +284,16 @@
 import { ref, onMounted, reactive } from "vue";
 import httpClient from "@/main";
 const backendURL = import.meta.env.VITE_AXIOS_HTTP_BASEURL;
+
+const totalPages = ref(1);
+const currentPageNum = ref(1);
+const pageContent = ref([]);
+
+function goSomePage(somePage, pageContent) {
+  // console.log('somePage' + somePage)
+  // console.log('click!!!')
+  pageContent, somePage;
+}
 
 const lostProperties = ref([]);
 const lostPhoto = ref([]);
@@ -268,6 +329,9 @@ function getLostPage() {
     })
     .then((res) => {
       console.log(res.data);
+      totalPages.value = res.data.totalPages;
+      currentPageNum.value = res.data.pageable.pageNumber + 1;
+      pageContent.value = res.data.content;
       //   lostProperties.value = res.data.content;
       lostProperties.value = res.data.content.map((prop) => ({
         ...prop,
@@ -354,10 +418,10 @@ function changeLostProperty(item) {
 onMounted(getLostPage);
 </script>
 <style>
-#tripId {
+#tripIdd {
   width: 4em;
 }
-#simpleOutward {
+#simpleOutwardd {
   width: 6em;
 }
 </style>
