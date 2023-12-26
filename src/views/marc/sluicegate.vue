@@ -6,15 +6,30 @@ import {Html5Qrcode} from "html5-qrcode";
 import { onMounted ,ref,reactive} from "vue";
 const msg = ref('')
 const state=ref(0) // 0 -> 1 - > 2 -> 0
+var useCamMode = true;
+
 var html5QrcodeScanner = null
 function startCam(){
+  console.log('in start cam func')
   state.value=0;
-  document.getElementById('html5-qrcode-button-camera-start').click();
+  if(document.getElementById('html5-qrcode-button-camera-start') != null){
+    if( useCamMode){
+      setTimeout(()=>{
+        document.getElementById('html5-qrcode-button-camera-start').click();
+      },2500)
+    }
+  }
 }
 function closeCam(){
   console.log('in close cam func')
   state.value=1;
-  document.getElementById('html5-qrcode-button-camera-stop').click();
+  if(document.getElementById('html5-qrcode-button-camera-stop')!=null){
+    if( useCamMode){
+      setTimeout(()=>{
+        document.getElementById('html5-qrcode-button-camera-stop').click();
+      },2500)
+    }
+  }
 } 
 function bootWebCam(){
   msg.value=''
@@ -48,9 +63,7 @@ function bootWebCam(){
     }
     
     function onScanFailure(error) {
-      // handle scan failure, usually better to ignore and keep scanning.
-      // for example:
-      // msg.value= '掃描失敗，請重新嘗試'
+      
       // state.value = 0;
     }
     html5QrcodeScanner.render(onScanSuccess, onScanFailure);
@@ -65,7 +78,13 @@ function bootWebCam(){
       // })
     
 }
-onMounted(bootWebCam)
+onMounted(()=>{
+  bootWebCam();
+  document.getElementById('html5-qrcode-anchor-scan-type-change').addEventListener('click',()=>{
+  console.log('switch scan mode')
+  useCamMode = !useCamMode
+})
+})
 </script>
 <template>
 <div class="container">
