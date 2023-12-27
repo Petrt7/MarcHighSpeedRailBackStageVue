@@ -211,15 +211,15 @@
                     完成
                   </button>
                 </td>
-                <!-- <td v-if="item.isEditing">
+                <td v-if="item.isEditing">
                   <button
                     type="button"
-                    class="btn btn-secondary"
-                    @click="modifyLostProperty(item)"
+                    class="btn btn-danger"
+                    @click="deleteLost(item.lostPropertyId)"
                   >
-                    取消
+                    刪除
                   </button>
-                </td> -->
+                </td>
               </tr>
             </tbody>
           </table>
@@ -283,6 +283,7 @@
 <script setup>
 import { ref, onMounted, reactive } from "vue";
 import httpClient from "@/main";
+import router from "../../router";
 const backendURL = import.meta.env.VITE_AXIOS_HTTP_BASEURL;
 
 const totalPages = ref(1);
@@ -319,6 +320,18 @@ const tempLostProperty = reactive({
   letterCheck: "",
   receiveCheck: "",
 });
+
+function deleteLost(id) {
+  httpClient
+    .delete("/LostProperty/backend/deleteByLostPropertyId/" + id)
+    .then((res) => {
+      alert("刪除了 id = " + id + " 的遺失物");
+      location.reload();
+    })
+    .catch(function (err) {
+      console.error("發生錯誤:", err);
+    });
+}
 
 function getLostPage() {
   httpClient
