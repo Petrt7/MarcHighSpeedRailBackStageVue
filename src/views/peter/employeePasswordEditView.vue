@@ -97,7 +97,12 @@ function edit() {
         emp.name = route.query.name;
         emp.acc = route.query.acc;
         emp.psw = psw2;
-        httpClient.put("/employee/account/update", emp);
+        httpClient.put("/employee/account/update", emp)
+        .then((res)=>{
+        if(res.status==200){
+        router.push("/emp/index")
+        }
+        });
     }
 }
 </script>

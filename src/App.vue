@@ -120,6 +120,22 @@ const path = useRoute().path;
                     >遺失物列表</router-link
                   >
                 </button>
+                <button class="dropdown-item">
+                  <router-link
+                    to="/lostParadise/lostSearch"
+                    id="fontcolor"
+                    class="nav-link"
+                    >遺失物搜尋</router-link
+                  >
+                </button>
+                <button class="dropdown-item">
+                  <router-link
+                    to="/lostParadise/lostRecord"
+                    id="fontcolor"
+                    class="nav-link"
+                    >領取紀錄</router-link
+                  >
+                </button>
               </li>
             </ul>
           </li>

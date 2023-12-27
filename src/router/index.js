@@ -31,6 +31,8 @@ import sluicegate from '../views/marc/sluicegate.vue'
 // wowowork back stage component
 import lostAdd from '../views/wowowork/lostAdd.vue'
 import lostAll from '../views/wowowork/lostAll.vue'
+import lostRecord from '../views/wowowork/lostRecord.vue'
+import lostSearch from '../views/wowowork/lostSearch.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -171,6 +173,14 @@ const router = createRouter({
       path: '/emp/leave/read',
       name: 'employeeReadLeavePage',
       component: employeeReadLeaveView
+    },
+    {
+      path: '/lostParadise/lostSearch',
+      component: lostSearch,
+    },
+    {
+      path: '/lostParadise/lostRecord',
+      component: lostRecord,
     }
   ]
 })
