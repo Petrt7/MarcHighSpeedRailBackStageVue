@@ -18,14 +18,14 @@ const judgeEmployeeAccountListView = ref(false);
 
 const reads = reactive([]);
 
-onMounted(() => {
-    view(useRoute().path).then((res) => {
-        if (res === false) {
+onMounted(async () => {
+    await view(useRoute().path).then((res) => {
+        if (!res) {
             router.push("/error");
         }
     });
 
-    view("/emp/author/list")
+    await view("/emp/author/list")
         .then((res) => {
             judgeAuthorListPage.value = res;
         })
@@ -33,7 +33,7 @@ onMounted(() => {
             judgeAuthorListPage.value = err;
         });
 
-    view("/emp/hrms")
+    await view("/emp/hrms")
         .then((res) => {
             judgeHrmsView.value = res;
         })
@@ -41,7 +41,7 @@ onMounted(() => {
             judgeHrmsView.value = err;
         });
 
-    view("/emp/leave/apply")
+    await view("/emp/leave/apply")
         .then((res) => {
             judgeLeaveApplyView.value = res;
         })
@@ -49,14 +49,14 @@ onMounted(() => {
             judgeLeaveApplyView.value = err;
         });
 
-    view("/emp/leave/audit")
+    await view("/emp/leave/audit")
         .then((res) => {
             leaveAuditView.value = res;
         })
         .catch((err) => {
             leaveAuditView.value = err;
         });
-    view("/emp/acc/list")
+    await view("/emp/acc/list")
         .then((res) => {
             judgeEmployeeAccountListView.value = res;
         })
