@@ -181,6 +181,14 @@ const router = createRouter({
       path: '/emp/leave/read',
       name: 'employeeReadLeavePage',
       component: employeeReadLeaveView
+    },
+    {
+      path: '/lostParadise/lostSearch',
+      component: lostSearch,
+    },
+    {
+      path: '/lostParadise/lostRecord',
+      component: lostRecord,
     }
   ]
 })
