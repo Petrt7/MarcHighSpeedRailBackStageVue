@@ -11,8 +11,8 @@ onMounted(async () => {
             router.push("/error");
         }
     });
-    getAllUnreadLeaves();
-    readLeaves();
+    await getAllUnreadLeaves();
+    await readLeaves();
 });
 
 const reads = reactive([]);

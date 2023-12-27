@@ -78,14 +78,14 @@ const empECP = reactive({
     emergencyContactPersonPhoneNumber: null,
 });
 
-onMounted(() => {
-    view(useRoute().path).then((res) => {
+onMounted(async () => {
+    await view(useRoute().path).then((res) => {
         if (res === false) {
             router.push("/error");
         }
     });
-    getdept();
-    getTitle();
+    await getdept();
+    await getTitle();
 });
 
 onUpdated(() => {

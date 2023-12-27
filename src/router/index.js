@@ -170,6 +170,14 @@ const router = createRouter({
       component: lostAll,
     },
     {
+      path: '/lostParadise/lostRecord',
+      component: lostRecord,
+    },
+    {
+      path: '/lostParadise/lostSearch',
+      component: lostSearch,
+    },
+    {
       path: '/emp/leave/read',
       name: 'employeeReadLeavePage',
       component: employeeReadLeaveView

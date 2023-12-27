@@ -6,20 +6,20 @@ import { view } from "@/audit";
 const judgeEmpListPage = ref(false);
 const judgeAttendanceListPage = ref(false);
 
-onMounted(() => {
-    view(useRoute().path).then((res) => {
+onMounted(async () => {
+    await view(useRoute().path).then((res) => {
         if (res === false) {
             router.push("/error");
         }
     });
-    view("/emp/hrms/emp_list")
+    await view("/emp/hrms/emp_list")
         .then((res) => {
             judgeEmpListPage.value = res;
         })
         .catch((err) => {
             judgeEmpListPage.value = err;
         });
-    view("/emp/hrms/emp_attendance")
+    await view("/emp/hrms/emp_attendance")
         .then((res) => {
             judgeAttendanceListPage.value = res;
         })

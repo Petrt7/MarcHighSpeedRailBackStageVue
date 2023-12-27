@@ -180,15 +180,15 @@ const empTitle = reactive({
     title: { titleId: null },
 });
 
-onMounted(() => {
-    view(useRoute().path).then((res) => {
+onMounted(async () => {
+    await view(useRoute().path).then((res) => {
         if (res === false) {
             router.push("/error");
         }
     });
-    getemp();
-    getdept();
-    getTitle();
+    await getemp();
+    await getdept();
+    await getTitle();
 });
 
 const getemp = function () {

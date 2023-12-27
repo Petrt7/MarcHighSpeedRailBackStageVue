@@ -1,6 +1,5 @@
 <template>
-  AAA
-  <!-- <div>
+  <div>
     <div class="container mt-4">
       <div class="row">
         <div class="col-md-12">
@@ -16,8 +15,8 @@
                 <th>失物圖片</th>
               </tr>
             </thead>
-            <tbody> -->
-  <!-- <tr v-for="item in findLosts" :key="item.findLostId">
+            <tbody>
+              <tr v-for="item in findLosts" :key="item.findLostId">
                 <td>{{ item.lostPropertyId }}</td>
                 <td>{{ item.simpleOutward }}</td>
                 <td>{{ item.detailOutward }}</td>
@@ -31,10 +30,10 @@
                     :data-bs-target="'#photoModal' + item.lostPropertyId"
                   >
                     照片
-                  </button> -->
+                  </button>
 
-  <!-- 照片模態框 -->
-  <!-- <div
+                  <!-- 照片模態框 -->
+                  <div
                     class="modal fade"
                     :id="'photoModal' + item.lostPropertyId"
                     tabindex="-1"
@@ -54,9 +53,9 @@
                             aria-label="Close"
                           ></button>
                         </div>
-                        <div class="modal-body"> -->
-  <!-- 顯示照片的 img 標籤 -->
-  <!-- <img
+                        <div class="modal-body">
+                          <!-- 顯示照片的 img 標籤 -->
+                          <img
                             :src="
                               backendURL +
                               '/LostProperty/backend/downloadImage/' +
@@ -76,7 +75,7 @@
         </div>
       </div>
     </div>
-  </div> -->
+  </div>
 </template>
 
 <script setup>
@@ -86,18 +85,10 @@ const backendURL = import.meta.env.VITE_AXIOS_HTTP_BASEURL;
 
 const findLosts = reactive({
   findLostId: "",
-  lostProperty: {
-    lostPropertyId: "",
-    tripId: "",
-    stationName: "",
-    findDate: "",
-    stayStation: "",
-    simpleOutward: "",
-    detailOutward: "",
-    letterCheck: "",
-    receiveCheck: "",
-    // hibernateLazyInitializer: "",
-  },
+  lostPropertyId: "",
+  simpleOutward: "",
+  detailOutward: "",
+  stayStation: "",
   findLostDate: "",
 });
 // const findLosts = ref([]);
@@ -124,7 +115,7 @@ function getFindLost() {
       //   findLosts.letterCheck = res.data.lostProperty.letterCheck;
       //   findLosts.receiveCheck = res.data.lostProperty.receiveCheck;
       //   findLosts.findLostDate = res.data.findLostDate;
-      //   findLosts = res.data;
+      findLosts = res.data;
     })
     .catch(function (err) {
       console.error("Error:", err);

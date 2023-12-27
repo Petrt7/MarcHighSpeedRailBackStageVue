@@ -45,34 +45,34 @@ const data = reactive({
     emps: "",
 });
 
-onMounted(() => {
-    view(useRoute().path).then((res) => {
+onMounted(async () => {
+    await view(useRoute().path).then((res) => {
         if (res === false) {
             router.push("/error");
         }
     });
-    view("/emp/hrms/add_emp")
+    await view("/emp/hrms/add_emp")
         .then((res) => {
             judgeAddEmployeePage.value = res;
         })
         .catch((err) => {
             judgeAddEmployeePage.value = err;
         });
-    view("/emp/hrms/emp_data")
+    await view("/emp/hrms/emp_data")
         .then((res) => {
             judgeEmployeeDataPage.value = res;
         })
         .catch((err) => {
             judgeEmployeeDataPage.value = err;
         });
-    del(useRoute().path)
+    await del(useRoute().path)
         .then((res) => {
             judgeDelete.value = res;
         })
         .catch((err) => {
             judgeDelete.value = err;
         });
-    getemp();
+    await getemp();
 });
 
 const getemp = function () {

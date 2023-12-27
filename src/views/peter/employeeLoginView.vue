@@ -52,6 +52,27 @@ function clearInput() {
   account.value = "";
   psw.value = "";
 }
+
+function admin() {
+  let acc = document.getElementById("acc");
+  acc.value = "admin";
+  let pwd = document.getElementById("pwd");
+  pwd.value = "6782";
+}
+
+function personnel() {
+  let acc = document.getElementById("acc");
+  acc.value = "A123456788123";
+  let pwd = document.getElementById("pwd");
+  pwd.value = "A123456788456";
+}
+
+function employee() {
+  let acc = document.getElementById("acc");
+  acc.value = "A123456789123";
+  let pwd = document.getElementById("pwd");
+  pwd.value = "A123456789456";
+}
 </script>
 
 <template>
@@ -63,18 +84,22 @@ function clearInput() {
           <div id="user-input">
             <div class="input-group">
               <label for="staticEmail" class="col-sm-4 col-form-label">帳號</label>
-              <input class="form-control" name="account" v-model.trim="account" />
+              <input class="form-control" name="account" v-model.trim="account" id="acc" />
             </div>
             <br />
             <div class="input-group">
               <label for="staticEmail" class="col-sm-4 col-form-label">密碼</label>
-              <input class="form-control" name="password" v-model.trim="psw" type="password" />
+              <input class="form-control" name="password" v-model.trim="psw" type="password" id="pwd" />
             </div>
             <br />
             <button @click="postUserInput" class="btn btn-success mb-2">登入</button>
           </div>
         </div>
       </div>
+
+      <button @click="admin" class="btn btn-outline-primary">管理員</button>
+      <button @click="personnel" class="btn btn-outline-primary">人事</button>
+      <button @click="employee" class="btn btn-outline-primary">一般員工</button>
 
       <div id="result" style="color: red">{{ result }}</div>
 
