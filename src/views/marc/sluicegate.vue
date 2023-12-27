@@ -13,24 +13,41 @@ function startCam(){
   console.log('in start cam func')
   state.value=0;
   if(document.getElementById('html5-qrcode-button-camera-start') != null){
-    if( useCamMode){
-      setTimeout(()=>{
-        document.getElementById('html5-qrcode-button-camera-start').click();
-      },2500)
-    }
+    document.getElementById('html5-qrcode-button-camera-start').click();
   }
 }
 function closeCam(){
   console.log('in close cam func')
   state.value=1;
   if(document.getElementById('html5-qrcode-button-camera-stop')!=null){
-    if( useCamMode){
-      setTimeout(()=>{
-        document.getElementById('html5-qrcode-button-camera-stop').click();
-      },2500)
-    }
+    document.getElementById('html5-qrcode-button-camera-stop').click();
   }
 } 
+function onScanSuccess(decodedText, decodedResult) {
+    closeCam();
+    // console.log( decodedResult+'::' + decodedText);
+    msg.value= '掃描成功，開始驗證車票'
+    state.value=1
+    let config={
+      headers: { 'Content-Type': 'application/json' }
+    }
+    console.log('go verfyTicketQrcode')
+    httpClient.post('/verifyTicketQRcode',decodedText,config).then(res=>{
+      console.log( 'get res')
+      if(res.status==200){
+        state.value =2;
+        msg.value = '車票驗證成功，請進入'
+        setTimeout( startCam, 4000);
+      }
+    }).catch(err=>{
+      msg.value = '車票驗證失敗'
+      startCam();
+    })
+    // closeCam();
+}
+function onScanFailure(error) {
+  // state.value = 0;
+}
 function bootWebCam(){
   msg.value=''
   if( html5QrcodeScanner===null){
@@ -40,32 +57,6 @@ function bootWebCam(){
   { fps: 10, qrbox: {width: 500, height: 500} },
   /* verbose= */ false);
   }
-    function onScanSuccess(decodedText, decodedResult) {
-        closeCam();
-        console.log( decodedResult+'::' + decodedText);
-        msg.value= '掃描成功，開始驗證車票'
-        state.value=1
-        let config={
-          headers: { 'Content-Type': 'application/json' }
-        }
-        console.log('go verfyTicketQrcode')
-        httpClient.post('/verifyTicketQRcode',decodedText,config).then(res=>{
-          console.log( 'get res')
-          if(res.status==200){
-            state.value =2;
-            msg.value = '車票驗證成功，請進入'
-            setTimeout( startCam, 4000);
-          }
-        }).catch(err=>{
-          msg.value = '車票驗證失敗'
-          startCam();
-        })
-    }
-    
-    function onScanFailure(error) {
-      
-      // state.value = 0;
-    }
     html5QrcodeScanner.render(onScanSuccess, onScanFailure);
     // // To use Html5Qrcode (more info below)
     // let cameraId 
