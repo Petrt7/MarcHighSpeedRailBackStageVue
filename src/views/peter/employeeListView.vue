@@ -45,6 +45,8 @@ const data = reactive({
     emps: "",
 });
 
+const route = useRoute();
+
 onMounted(async () => {
     await view(useRoute().path).then((res) => {
         if (res === false) {
@@ -65,7 +67,7 @@ onMounted(async () => {
         .catch((err) => {
             judgeEmployeeDataPage.value = err;
         });
-    await del(useRoute().path)
+    await del(route.path)
         .then((res) => {
             judgeDelete.value = res;
         })

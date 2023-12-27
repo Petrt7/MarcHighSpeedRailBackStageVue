@@ -105,20 +105,14 @@ function logout() {
         </button>
         <div class="container text-center" style="margin-top: 12%">
             <div class="row align-items-center">
-                <div class="col">
-                    <router-link to="/emp/leave/apply"><button v-if="judgeLeaveApplyView" class="btn btn-success btn-lg">
-                            請假申請
-                        </button></router-link>
+                <div class="col" v-if="judgeLeaveApplyView">
+                    <router-link to="/emp/leave/apply"><button class="btn btn-success btn-lg">請假申請</button></router-link>
                 </div>
-                <div class="col">
-                    <router-link to="/emp/author/list"><button v-if="judgeAuthorListPage" class="btn btn-success btn-lg">
-                            權限管理
-                        </button></router-link>
+                <div class="col" v-if="judgeAuthorListPage">
+                    <router-link to="/emp/author/list"><button class="btn btn-success btn-lg">權限管理</button></router-link>
                 </div>
-                <div class="col">
-                    <router-link to="/emp/hrms"><button v-if="judgeHrmsView" class="btn btn-success btn-lg">
-                            人資管理
-                        </button></router-link>
+                <div class="col" v-if="judgeHrmsView">
+                    <router-link to="/emp/hrms"><button class="btn btn-success btn-lg">人資管理</button></router-link>
                 </div>
             </div>
         </div>
@@ -127,16 +121,11 @@ function logout() {
     <div class="container">
         <div class="container text-center">
             <div class="row align-items-center">
-                <div class="col">
-                    <router-link to="/emp/leave/audit"><button v-if="leaveAuditView" class="btn btn-success btn-lg">
-                            請假審核
-                        </button></router-link>
+                <div class="col" v-if="leaveAuditView">
+                    <router-link to="/emp/leave/audit"><button class="btn btn-success btn-lg">請假審核</button></router-link>
                 </div>
-                <div class="col">
-                    <router-link to="/emp/acc/list"><button v-if="judgeEmployeeAccountListView"
-                            class="btn btn-success btn-lg">
-                            員工帳號密碼管理
-                        </button></router-link>
+                <div class="col" v-if="judgeEmployeeAccountListView">
+                    <router-link to="/emp/acc/list"><button class="btn btn-success btn-lg">員工帳號密碼管理</button></router-link>
                 </div>
                 <div class="col"></div>
             </div>

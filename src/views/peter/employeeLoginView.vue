@@ -54,24 +54,18 @@ function clearInput() {
 }
 
 function admin() {
-  let acc = document.getElementById("acc");
-  acc.value = "admin";
-  let pwd = document.getElementById("pwd");
-  pwd.value = "6782";
+  account.value = "admin";
+  psw.value = "6782";
 }
 
 function personnel() {
-  let acc = document.getElementById("acc");
-  acc.value = "A123456788123";
-  let pwd = document.getElementById("pwd");
-  pwd.value = "A123456788456";
+  account.value = "A123456788123";
+  psw.value = "A123456788456";
 }
 
 function employee() {
-  let acc = document.getElementById("acc");
-  acc.value = "A123456789123";
-  let pwd = document.getElementById("pwd");
-  pwd.value = "A123456789456";
+  account.value = "A123456789123";
+  psw.value = "A123456789456";
 }
 </script>
 
@@ -84,12 +78,12 @@ function employee() {
           <div id="user-input">
             <div class="input-group">
               <label for="staticEmail" class="col-sm-4 col-form-label">帳號</label>
-              <input class="form-control" name="account" v-model.trim="account" id="acc" />
+              <input class="form-control" name="account" v-model.trim="account" />
             </div>
             <br />
             <div class="input-group">
               <label for="staticEmail" class="col-sm-4 col-form-label">密碼</label>
-              <input class="form-control" name="password" v-model.trim="psw" type="password" id="pwd" />
+              <input class="form-control" name="password" v-model.trim="psw" type="password" />
             </div>
             <br />
             <button @click="postUserInput" class="btn btn-success mb-2">登入</button>

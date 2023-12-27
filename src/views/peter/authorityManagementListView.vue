@@ -60,13 +60,15 @@ const jsonData = reactive({
     data: [],
 });
 
+const route = useRoute();
+
 onMounted(async () => {
     await view(useRoute().path).then((res) => {
         if (res === false) {
             router.push("/error");
         }
     });
-    await del(useRoute().path)
+    await del(route.path)
         .then((res) => {
             deleteAuthor.value = res;
         })

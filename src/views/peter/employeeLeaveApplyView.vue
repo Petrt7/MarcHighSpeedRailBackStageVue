@@ -49,6 +49,18 @@ function send() {
             console.log(err);
         });
 }
+
+function leaveApply() {
+    employeeLeave.reason = "累累病";
+    employeeLeave.startTime = "2023-12-19T08:00";
+    employeeLeave.endTime = "2023-12-19T16:00";
+}
+
+function leaveApply2() {
+    employeeLeave.reason = "星期三症候群";
+    employeeLeave.startTime = "2023-12-20T08:00";
+    employeeLeave.endTime = "2023-12-20T16:00";
+}
 </script>
 <template>
     <div class="container text-center">
@@ -79,7 +91,7 @@ function send() {
             <div class="col"></div>
             <div class="col">
                 <label>請假起始時間：</label>
-                <input type="datetime-local" v-model="employeeLeave.startTime" />
+                <input type="datetime-local" v-model="employeeLeave.startTime" class="form-control" />
             </div>
             <div class="col"></div>
         </div>
@@ -89,7 +101,7 @@ function send() {
             <div class="col"></div>
             <div class="col">
                 <label>請假結束時間：</label>
-                <input type="datetime-local" v-model="employeeLeave.endTime" />
+                <input type="datetime-local" v-model="employeeLeave.endTime" class="form-control" />
             </div>
             <div class="col"></div>
         </div>
@@ -103,6 +115,10 @@ function send() {
             </div>
             <div class="col"></div>
         </div>
+    </div>
+    <div class="container">
+        <button @click="leaveApply" class="btn btn-outline-primary">一鍵請假</button>
+        <button @click="leaveApply2" class="btn btn-outline-primary">一鍵請假2</button>
     </div>
 </template>
 
