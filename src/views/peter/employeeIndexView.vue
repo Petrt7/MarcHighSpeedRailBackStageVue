@@ -64,7 +64,7 @@ onMounted(async () => {
         .catch((err) => {
             judgeEmployeeAccountListView.value = err;
         });
-    getAllUnreadLeaves();
+    await getAllUnreadLeaves();
 });
 
 function getAllUnreadLeaves() {

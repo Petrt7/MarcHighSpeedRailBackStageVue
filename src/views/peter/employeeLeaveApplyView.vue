@@ -8,13 +8,13 @@ import httpClient from "@/main";
 const leaves = reactive([]);
 
 onMounted(async () => {
-    view(useRoute().path).then((res) => {
+    await view(useRoute().path).then((res) => {
         if (res === false) {
             router.push("/error");
         }
     });
-    getAllLeaveKinds();
-    getEmp();
+    await getAllLeaveKinds();
+    await getEmp();
 });
 
 const employeeLeave = reactive({

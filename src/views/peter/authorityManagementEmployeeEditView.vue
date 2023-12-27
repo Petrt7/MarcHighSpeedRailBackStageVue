@@ -56,12 +56,12 @@ const saStringRef = reactive({
 });
 
 onMounted(async () => {
-    view(useRoute().path).then((res) => {
+    await view(useRoute().path).then((res) => {
         if (res === false) {
             router.push("/error");
         }
     });
-    getAllSystemAuthors();
+    await getAllSystemAuthors();
 });
 
 async function getAllSystemAuthors() {

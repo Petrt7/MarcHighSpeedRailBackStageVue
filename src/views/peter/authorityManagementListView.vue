@@ -61,47 +61,47 @@ const jsonData = reactive({
 });
 
 onMounted(async () => {
-    view(useRoute().path).then((res) => {
+    await view(useRoute().path).then((res) => {
         if (res === false) {
             router.push("/error");
         }
     });
-    del(useRoute().path)
+    await del(useRoute().path)
         .then((res) => {
             deleteAuthor.value = res;
         })
         .catch((err) => {
             deleteAuthor.value = err;
         });
-    view("/emp/author/emp/add")
+    await view("/emp/author/emp/add")
         .then((res) => {
             addEmpSystemAuthorPage.value = res;
         })
         .catch((err) => {
             addEmpSystemAuthorPage.value = err;
         });
-    view("/emp/author/dept/add")
+    await view("/emp/author/dept/add")
         .then((res) => {
             addDeptSystemAuthorPage.value = res;
         })
         .catch((err) => {
             addDeptSystemAuthorPage.value = err;
         });
-    view("/emp/author/emp/edit")
+    await view("/emp/author/emp/edit")
         .then((res) => {
             employeeAuthorEditPage.value = res;
         })
         .catch((err) => {
             employeeAuthorEditPage.value = err;
         });
-    view("/emp/author/dept/edit")
+    await view("/emp/author/dept/edit")
         .then((res) => {
             departmentAuthorEditPage.value = res;
         })
         .catch((err) => {
             departmentAuthorEditPage.value = err;
         });
-    getAllSystemAuthoMembers();
+    await getAllSystemAuthoMembers();
 });
 
 function toEdit(item) {

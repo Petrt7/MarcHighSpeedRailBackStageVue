@@ -8,12 +8,12 @@ import httpClient from "@/main";
 const audits = reactive([]);
 
 onMounted(async () => {
-    view(useRoute().path).then((res) => {
+    await view(useRoute().path).then((res) => {
         if (res === false) {
             router.push("/error");
         }
     });
-    getAudit();
+    await getAudit();
 });
 
 function getAudit() {
