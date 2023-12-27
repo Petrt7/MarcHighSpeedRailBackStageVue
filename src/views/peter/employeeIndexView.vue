@@ -23,6 +23,7 @@ onMounted(async () => {
         if (!res) {
             router.push("/error");
         }
+        console.log(res);
     });
 
     await view("/emp/author/list")
