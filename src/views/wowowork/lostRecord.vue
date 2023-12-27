@@ -23,7 +23,7 @@
                 <td>{{ item.stayStation }}</td>
                 <td>{{ item.findLostDate }}</td>
                 <td>
-                  <button
+                  <button @click="getPhoto(item.lostPropertyId)"
                     type="button"
                     class="btn btn-warning"
                     data-bs-toggle="modal"
@@ -56,14 +56,16 @@
                         <div class="modal-body">
                           <!-- 顯示照片的 img 標籤 -->
                           <img
-                            :src="
-                              backendURL +
-                              '/LostProperty/backend/downloadImage/' +
-                              item.lostPropertyId
-                            "
+                            :src="item.photo"
+                            
                             class="card-img-bottom"
                             alt="item.findLostId"
                           />
+                          <!--:src="
+                              backendURL +
+                              '/LostProperty/backend/downloadImage/' +
+                              item.lostPropertyId
+                            "-->
                         </div>
                       </div>
                     </div>
@@ -79,48 +81,65 @@
 </template>
 
 <script setup>
-import { onMounted, reactive } from "vue";
+const backURL = import.meta.env.VITE_AXIOS_HTTP_BASEURL; 
+import { onMounted, reactive , onBeforeMount} from "vue";
 import httpClient from "@/main";
-const backendURL = import.meta.env.VITE_AXIOS_HTTP_BASEURL;
+onBeforeMount(()=>{
+  const backendURL = import.meta.env.VITE_AXIOS_HTTP_BASEURL; 
+})
 
-const findLosts = reactive({
-  findLostId: "",
-  lostPropertyId: "",
-  simpleOutward: "",
-  detailOutward: "",
-  stayStation: "",
-  findLostDate: "",
-});
+const findLosts = reactive([]);
 // const findLosts = ref([]);
 
 function getFindLost() {
   httpClient
-    .get("/LostProperty/backend/findAll", findLosts, {
+    .get("/FindLost/backend/findAll", findLosts, {
       headers: {
         "Content-Type": " application/json",
       },
     })
     .then((res) => {
       console.log(res.data);
-      //   lostProperties.value = res.data.content;
-      //   findLosts.findLostId = res.data.findLostId;
-      //   findLosts.lostProperty = res.data.lostProperty;
-      //   findLosts.lostPropertyId = res.data.lostProperty.lostPropertyId;
-      //   findLosts.tripId = res.data.lostProperty.tripId;
-      //   findLosts.stationName = res.data.lostProperty.stationName;
-      //   findLosts.findDate = res.data.lostProperty.findDate;
-      //   findLosts.stayStation = res.data.lostProperty.stayStation;
-      //   findLosts.simpleOutward = res.data.lostProperty.simpleOutward;
-      //   findLosts.detailOutward = res.data.lostProperty.detailOutward;
-      //   findLosts.letterCheck = res.data.lostProperty.letterCheck;
-      //   findLosts.receiveCheck = res.data.lostProperty.receiveCheck;
-      //   findLosts.findLostDate = res.data.findLostDate;
-      findLosts = res.data;
+        // lostProperties.value = res.data.content;
+        for( let d of res.data){
+          findLosts.push({
+            findLostId : d.findLostId,
+            // findLosts.lostProperty = d.lostProperty;
+            lostPropertyId : d.lostPropertyId,
+            tripId : d.tripId,
+            stationName : d.stationName,
+            findDate : d.findDate,
+            stayStation : d.stayStation,
+            simpleOutward : d.simpleOutward,
+            detailOutward : d.detailOutward,
+            letterCheck : d.letterCheck,
+            receiveCheck : d.receiveCheck,
+            findLostDate : d.findLostDate,
+            photo: null
+          })
+        }
+      // findLosts = res.data;
     })
     .catch(function (err) {
       console.error("Error:", err);
       // Handle the error as needed
     });
+}
+
+function getPhoto(id){
+  httpClient.get('/LostProperty/backend/downloadImage/' +id).then((res)=>{
+    if(res.status==200){
+      console.log( res);
+      // find in finddLosts of item.lostPropertyId == id
+      for( let i =0; i<findLosts.length ; i++){
+        if( findLosts[i].lostPropertyId == id){
+          findLosts[i].photo=backURL+'/LostProperty/backend/downloadImage/' +id
+          // console.log( ' find lost in arr , try to add img')
+          // findLosts[i].photo = "data:image/png;base64,"+res.data;
+        }
+      }
+    }
+  })
 }
 onMounted(getFindLost);
 </script>
