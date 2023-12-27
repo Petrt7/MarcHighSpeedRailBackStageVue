@@ -76,8 +76,8 @@ function turnDown(audit) {
                 <th scope="col">原因</th>
                 <th scope="col">起始時間</th>
                 <th scope="col">結束時間</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
+                <th scope="col">請假描述</th>
+                <th scope="col">已請假天數</th>
             </tr>
         </thead>
         <tbody>
@@ -87,6 +87,8 @@ function turnDown(audit) {
                 <td>{{ audit.reason }}</td>
                 <td><input type="datetime-local" :value="audit.startTime" disabled /></td>
                 <td><input type="datetime-local" :value="audit.endTime" disabled /></td>
+                <td>{{ audit.dis }}</td>
+                <td>{{ audit.count }}</td>
                 <td>
                     <button @click="approve(audit)" class="btn btn-outline-success">核准</button>
                 </td>
