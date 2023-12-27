@@ -57,7 +57,7 @@ function approve(audit) {
 
 function turnDown(audit) {
     audit.resultSnadDate = new Date().toISOString();
-    audit.audit = "fail";
+    audit.audit = "fail";   
     console.log(audit);
 }
 </script>

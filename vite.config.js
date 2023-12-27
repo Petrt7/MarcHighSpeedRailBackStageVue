@@ -21,7 +21,7 @@ export default defineConfig({
     https:false,
     proxy:{
       "/api":{
-        target: "http://localhost:8080/MarcHighSpeedRail", // will make request from front server proxy request to backend server .
+        target: "http://114.32.211.158:5175/api", // will make request from front server proxy request to backend server .
         changeOrigin:true,
         followRedirects:true,
         secure:false,
