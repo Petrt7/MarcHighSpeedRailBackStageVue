@@ -20,11 +20,11 @@ const reads = reactive([]);
 
 onMounted(() => {
     view(useRoute().path).then((res) => {
-        if (res === false) {
+        if (!res) {
             router.push("/error");
         }
+        console.log(res);
     });
-
     view("/emp/author/list")
         .then((res) => {
             judgeAuthorListPage.value = res;
@@ -40,7 +40,6 @@ onMounted(() => {
         .catch((err) => {
             judgeHrmsView.value = err;
         });
-
     view("/emp/leave/apply")
         .then((res) => {
             judgeLeaveApplyView.value = res;
@@ -48,7 +47,6 @@ onMounted(() => {
         .catch((err) => {
             judgeLeaveApplyView.value = err;
         });
-
     view("/emp/leave/audit")
         .then((res) => {
             leaveAuditView.value = res;
